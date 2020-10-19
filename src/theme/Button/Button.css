@@ -1,0 +1,28 @@
+.button {
+  /* background-color: var(--c-bekb-primary, #dc0528); */
+  color: var(--c-text);
+  cursor: pointer;
+  font-weight: 700;
+  padding: 0.7em 1em;
+  position: relative;
+  border-top: 1px solid var(--c-grau);
+  transition: background-color 0.15s ease-in-out;
+
+  &:hover {
+    //background-color: var(--c-hellgrau);
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__timer {
+    position: absolute;
+    bottom: 0;
+    /* right:0; */
+    left: 0;
+    top: 0;
+    background-color: var(--c-hellgrau);
+  }
+}

@@ -1,0 +1,103 @@
+.shadowbox {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+
+  &__close {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    position: relative;
+    text-indent: -9999px;
+    width: 1em;
+    line-height: 100%;
+    cursor: pointer;
+    margin: -0.2em -0.2em 0.5em 0;
+    font-size: 2rem;
+    border-radius: 50%;
+    color: #000;
+
+    &::after,
+    &::before {
+      content: '';
+      width: 2px;
+      height: 0.5em;
+      background-color: currentColor;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateY(-50%) translateX(-50%) rotate(45deg);
+    }
+
+    &::before {
+      transform: translateY(-50%) translateX(-50%) rotate(-45deg);
+    }
+
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &:focus {
+      background-color: #e2e2e2;
+      opacity: 1;
+    }
+  }
+
+  &__box {
+    max-width: 90vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    background-color: #fff;
+    padding: 1em;
+    text-align: right;
+    box-shadow: 0 0 80px rgba(0, 0, 0, 0.6);
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  &__content {
+    text-align: left;
+  }
+
+  &__shadow {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    background-color: #000;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  /* animation */
+  &__box {
+    transform: translateX(-50%) translateY(-30%) scale(1);
+  }
+
+  &__box, &__shadow {
+    opacity: 0;
+    will-change: opacity;
+    transition: all 200ms ease-in-out;
+  }
+
+  &[data-visible="true"] {
+    .shadowbox {
+      &__box {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-50%) scale(1);
+      }
+
+      &__shadow {
+        opacity: 0.7;
+      }
+    }
+  }
+}

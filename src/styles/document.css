@@ -1,0 +1,9 @@
+img {
+  overflow: hidden;
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  overflow: hidden;
+}

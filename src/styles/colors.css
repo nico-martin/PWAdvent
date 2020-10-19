@@ -1,0 +1,9 @@
+:root {
+  --c-weiss: rgb(255, 255, 255);
+  --c-schwarz: rgb(0, 0, 0);
+  --c-grau: #c4ccd3;
+  --c-hellgrau: #e9eef0;
+  --c-bekb-primary: #cc0033;
+  --c-bekb-visited: rgb(170, 17, 45);
+  --c-bekb-hover: rgb(137, 16, 35);
+}
