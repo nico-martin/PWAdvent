@@ -1,0 +1,28 @@
+.calendar-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  &__content {
+    position: absolute;
+    background-color: var(--c-primary);
+    color: var(--c-white);
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+  }
+
+  &__number {
+    line-height: 1;
+    padding: var(--space) 0 0 var(--space);
+    font-weight: 900;
+  }
+
+  &::before {
+    width: 100%;
+    padding-bottom: 100%;
+    content: '';
+  }
+}

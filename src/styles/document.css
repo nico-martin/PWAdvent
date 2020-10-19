@@ -5,5 +5,5 @@ img {
 }
 
 body {
-  overflow: hidden;
+  background-color: var(--c-bkg);
 }

@@ -1,7 +1,5 @@
 :root {
-  --grid: 4px;
-
-  --gap-s: var(--grid);
-  --gap-m: calc(var(--grid) * 3);
-  --gap-l: calc(var(--grid) * 6);
+  --space: 1rem;
+  --space-s: 0.8rem;
+  --space-l: 1.5rem;
 }
