@@ -1,5 +1,12 @@
 :root {
   --space: 1rem;
+  --space-grid: 1rem;
   --space-s: 0.8rem;
   --space-l: 1.5rem;
+}
+
+@media (max-width: 800px) {
+  :root {
+    --space-grid: 0.5rem;
+  }
 }

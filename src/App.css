@@ -1,5 +1,47 @@
 .app {
-  max-width: 500px;
-  margin: 0 auto;
-  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space);
+
+  &__grid {
+    height: calc(100% - 3vh - var(--space));
+  }
+
+  &__footer {
+    height: 3vh;
+    margin-top: var(--space);
+  }
+}
+
+.app-grid {
+  display: grid;
+  grid-gap: var(--space-grid);
+  grid-template-areas:
+    'about about cal01 cal02 cal02 cal03 cal04 cal05'
+    'about about cal06 cal07 cal08 cal08 cal04 cal09'
+    'cal10 cal11 cal11 cal12 cal13 cal14 cal15 cal09'
+    'cal16 cal16 cal17 cal12 cal18 cal14 cal24 cal24'
+    'cal21 cal22 cal23 cal19 cal18 cal20 cal24 cal24';
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+
+  @media (orientation: portrait) {
+    grid-template-areas:
+      'about about cal01 cal02'
+      'about about cal03 cal02'
+      'cal04 cal04 cal05 cal06'
+      'cal07 cal08 cal08 cal09'
+      'cal07 cal10 cal11 cal09'
+      'cal12 cal12 cal13 cal20'
+      'cal19 cal14 cal15 cal17'
+      'cal16 cal14 cal18 cal17'
+      'cal16 cal22 cal24 cal24'
+      'cal21 cal23 cal24 cal24';
+  }
+
+  &__item {
+    position: relative;
+  }
 }

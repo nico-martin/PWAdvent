@@ -1,28 +1,69 @@
 .calendar-day {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
   position: relative;
+  perspective: 1000px;
+  display: block;
 
-  &__content {
+  &__inner {
     position: absolute;
-    background-color: var(--c-primary);
-    color: var(--c-white);
     bottom: 0;
     right: 0;
     left: 0;
     top: 0;
-  }
-
-  &__number {
-    line-height: 1;
-    padding: var(--space) 0 0 var(--space);
-    font-weight: 900;
-  }
-
-  &::before {
     width: 100%;
-    padding-bottom: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  &__front,
+  &__back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+    background-color: var(--c-inactive);
+  }
+
+  &__back {
+    z-index: 10;
+    transform: rotateY(-180deg);
+    background-color: var(--c-primary-dark);
+  }
+
+  &__shade {
     content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    background-color: #fff;
+  }
+
+  &__content {
+    color: var(--c-white);
+    padding: var(--space-grid);
+    position: relative;
+    z-index: 1;
+    font-weight: 900;
+    font-size: 3vmin;
+    line-height: 1;
+  }
+
+  &--active {
+    .calendar-day__front {
+      background-color: var(--c-primary);
+    }
+
+    &:hover {
+      .calendar-day__inner {
+        transform: rotateY(-180deg);
+      }
+    }
   }
 }

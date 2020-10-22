@@ -1,21 +1,23 @@
 import React from 'react';
+import { Logo } from '@theme';
+import { DATE_TODAY } from '@utils/calendar';
 
-const About = ({ className = '' }: { className?: string }) => (
-  <article className={`${className} about`}>
+const About = ({
+  className = '',
+  ...props
+}: {
+  className?: string;
+  [key: string]: any;
+}) => (
+  <article className={`${className} about`} {...props}>
     <header className="about__header">
-      <h1>PWAdvent</h1>
+      <Logo title="PWAdvent Logo" alt="PWAdvent Logo" />
     </header>
     <p>
-      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-      eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-      voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-      clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-      amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-      nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
-      diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-      Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
-      sit amet.
+      From the 1st to the 24th of December 2020 we will introduce a new
+      progressive browser feature every day.
     </p>
+    <p>Today: {DATE_TODAY.format('L')}</p>
   </article>
 );
 

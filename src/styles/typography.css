@@ -1,7 +1,11 @@
+html {
+  //font-size: 2vmin;
+}
+
 body {
-  font-family: FrutigerLTW01, Helvetica, Arial, sans-serif;
-  font-weight: 300;
-  font-size: 90%;
+  font-family: Affogato, sans-serif;
+  font-weight: 400;
+  font-size: 100%;
   line-height: 1.6;
   color: var(--c-p);
 }
@@ -13,7 +17,8 @@ b {
 h1,
 h2,
 h3 {
-  font-family: 'Source Serif Pro', serif;
+  font-family: Affogato, sans-serif;
+  font-weight: 700;
   line-height: 1.1;
   font-size: 1.8em;
 }

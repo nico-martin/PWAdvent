@@ -55,6 +55,7 @@ module.exports = (env, argv) => {
     output: {
       path: dirDist,
       filename: 'assets/[name]-[hash].js',
+      publicPath: '/',
     },
     devtool: dev ? `cheap-module-eval-source-map` : undefined,
     plugins: [
@@ -118,7 +119,8 @@ module.exports = (env, argv) => {
           ]
         : []),
       new DefinePlugin({
-        IS_DEV: dev,
+        IS_DEV: JSON.stringify(dev),
+        TODAY: JSON.stringify(process.env.TODAY) || null,
       }),
     ],
     module: {

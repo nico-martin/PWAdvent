@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 export const YEAR: number = 2020;
 export const CALENDAR: number[] = [
   1,
@@ -24,4 +26,33 @@ export const CALENDAR: number[] = [
   22,
   23,
   24,
+];
+
+export const DATE_TODAY: dayjs.Dayjs = TODAY ? dayjs(TODAY) : dayjs();
+
+export const THEMEN: string[] = [
+  'manifest',
+  'sharing',
+  'shortcuts / badging',
+  'ServiceWorker',
+  'SW Cache',
+  'IndexedDB',
+  'persistent Storage',
+  'BKG sync',
+  'Push Notifications',
+  'Push Trigger',
+  'Media Session',
+  'native file system',
+  'Wake Lock',
+  'font access',
+  'Orientation lock',
+  'Multi window',
+  'credentials',
+  'payments',
+  'Web Midi',
+  'shape detection',
+  'contact picker',
+  'sms reciever',
+  'Paw Clipboard API',
+  'WASM',
 ];
