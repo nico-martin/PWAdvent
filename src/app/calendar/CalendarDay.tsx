@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { YEAR, DATE_TODAY, THEMEN } from '@utils/calendar';
+import { useStoreState, useActions } from 'unistore-hooks';
+import { actions } from '@store/index';
+import { State } from '@store/types';
 
-import dayjs from '@utils/dayjs';
-import { getRandomNumber, zeroPad } from '@utils/helpers';
+import { THEMEN } from '@utils/calendar';
+
+import { getRandomNumber } from '@utils/helpers';
 
 import './CalendarDay.css';
 
@@ -15,15 +18,15 @@ const CalendarDay = ({
   day: number;
   className?: string;
 }) => {
-  const date: dayjs.Dayjs = React.useMemo(
-    () => dayjs(`${YEAR}-12-${zeroPad(day, 2)}`),
-    [day]
-  );
+  const { loadDay } = useActions(actions);
+  const { days: storeDays } = useStoreState<State>(['days']);
 
-  const isActive: boolean = React.useMemo(
-    () => date.isBefore(DATE_TODAY) || date.isSame(DATE_TODAY),
-    [day]
-  );
+  const dayObject = React.useMemo(() => storeDays[day], [storeDays[day], day]);
+  const isActive = React.useMemo(() => dayObject.active, [dayObject]);
+
+  React.useEffect(() => {
+    loadDay(day);
+  }, [day]);
 
   const Wrapper = ({
     children,

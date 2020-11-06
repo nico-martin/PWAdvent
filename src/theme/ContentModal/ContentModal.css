@@ -1,0 +1,108 @@
+.content-modal {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
+  will-change: opacity;
+
+  &__bkg {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    background-color: var(--c-shadow);
+    opacity: 0.5;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: var(--c-bkg-light);
+    padding: var(--space-l);
+    z-index: 10;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--c-bkg-light);
+      z-index: -1;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2rem;
+      background: linear-gradient(
+        180deg,
+        rgba(189, 189, 189, 1) 0%,
+        rgba(0, 0, 0, 0) 100%
+      );
+      transition: transform 100ms ease-in;
+      will-change: transform;
+      transform: translateY(0);
+      z-index: -2;
+    }
+
+    &--shadow {
+      &::after {
+        transform: translateY(30%);
+      }
+    }
+  }
+
+  &__close {
+    font-size: 2rem;
+  }
+
+  &__inner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%) scale(0.5);
+    max-height: calc(100vh - (var(--space-l) * 2));
+    width: 900px;
+    max-width: calc(100vw - (var(--space-l) * 2));
+    background-color: var(--c-bkg-light);
+    transition: opacity 0.2s ease-in;
+    will-change: transform;
+    overflow: auto;
+
+    @media (max-width: 700px) {
+      width: 100%;
+      max-width: 100%;
+      max-height: 100vh;
+      height: 100vh;
+    }
+  }
+
+  &__content {
+    padding: var(--space) var(--space-l) var(--space-l) var(--space-l);
+  }
+
+  &__loader {
+    margin: 6vh 0 10vh 0;
+  }
+
+  &--visible {
+    opacity: 1;
+
+    .content-modal__inner {
+      transform: translateX(-50%) translateY(-50%) scale(1);
+    }
+  }
+}

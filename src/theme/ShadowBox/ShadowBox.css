@@ -77,18 +77,18 @@
     cursor: pointer;
   }
 
-  /* animation */
   &__box {
     transform: translateX(-50%) translateY(-30%) scale(1);
   }
 
-  &__box, &__shadow {
+  &__box,
+  &__shadow {
     opacity: 0;
     will-change: opacity;
     transition: all 200ms ease-in-out;
   }
 
-  &[data-visible="true"] {
+  &[data-visible='true'] {
     .shadowbox {
       &__box {
         opacity: 1;

@@ -1,4 +1,6 @@
 import './styles.css';
+import './styles/prism.css';
+import './styles/gutenberg-content.css';
 import './App';
 
 import { isDev, windowResize } from '@utils/helpers';

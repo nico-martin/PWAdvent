@@ -121,6 +121,9 @@ module.exports = (env, argv) => {
       new DefinePlugin({
         IS_DEV: JSON.stringify(dev),
         TODAY: JSON.stringify(process.env.TODAY) || null,
+        API_BASE: JSON.stringify(
+          process.env.API_BASE || 'https://api.pwadvent.dev/'
+        ),
       }),
     ],
     module: {
@@ -162,6 +165,9 @@ module.exports = (env, argv) => {
               loader: 'postcss-loader',
               options: {
                 plugins: () => [
+                  require('postcss-mixins')({
+                    mixinsDir: path.join(__dirname, 'src/styles/mixins'),
+                  }),
                   require('postcss-nested'),
                   require('autoprefixer'),
                 ],

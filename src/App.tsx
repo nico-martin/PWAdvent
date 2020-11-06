@@ -2,20 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { Provider, useActions } from 'unistore-hooks';
+import { Provider, useActions, useStoreState } from 'unistore-hooks';
 import { actions, store } from '@store/index';
 
 import './App.css';
 
 import About from '@app/About';
-import { CALENDAR } from '@utils/calendar';
 import CalendarDay from '@app/calendar/CalendarDay';
 import { zeroPad } from '@utils/helpers';
 import FooterMenu from '@app/FooterMenu';
 import Content from '@app/Content';
+import { State } from '@store/types';
 
 const App = () => {
   const { setOffline } = useActions(actions);
+  const { days: storeDays } = useStoreState<State>(['days']);
 
   React.useEffect(() => {
     setOffline(!navigator.onLine);
@@ -31,12 +32,12 @@ const App = () => {
           style={{ gridArea: 'about' }}
           className="app-grid__item app-grid__item--about"
         />
-        {CALENDAR.map(day => (
+        {Object.keys(storeDays).map(day => (
           <div
-            style={{ gridArea: `cal${zeroPad(day, 2)}` }}
+            style={{ gridArea: `cal${zeroPad(parseInt(day), 2)}` }}
             className={`app-grid__item app-grid__item--calendar app-grid__item--calendar-${day}`}
           >
-            <CalendarDay day={day} />
+            <CalendarDay day={parseInt(day)} />
           </div>
         ))}
       </div>

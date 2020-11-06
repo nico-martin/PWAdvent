@@ -1,0 +1,11 @@
+.gutenberg-content {
+  & > * {
+    & + * {
+      margin-top: var(--space);
+    }
+
+    & + h2 {
+      margin-top: var(--space-l);
+    }
+  }
+}

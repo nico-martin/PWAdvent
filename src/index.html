@@ -2,10 +2,10 @@
 <html>
 
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8"/>
   <title><%= htmlWebpackPlugin.options.title %></title>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <meta name="robots" content="noindex, nofollow" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="robots" content="noindex, nofollow"/>
   <!--
   <link rel="apple-touch-icon" sizes="57x57" href="/assets/static/icon/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/assets/static/icon/apple-icon-60x60.png">
@@ -23,8 +23,18 @@
 </head>
 
 <body>
-  <div id="app"></div>
-  <div id="shadowbox"></div>
+<svg class="lazysizes-svgfilter">
+  <filter id="ls-sharp-blur">
+    <feGaussianBlur stdDeviation="10"></feGaussianBlur>
+    <feColorMatrix
+      type="matrix"
+      values="1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 9 0"
+    ></feColorMatrix>
+    <feComposite in2="SourceGraphic" operator="in"></feComposite>
+  </filter>
+</svg>
+<div id="app"></div>
+<div id="shadowbox"></div>
 </body>
 
 </html>

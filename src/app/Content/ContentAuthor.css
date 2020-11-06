@@ -1,0 +1,44 @@
+.content-author {
+  display: flex;
+  align-items: center;
+
+  &__image {
+    border-radius: 50%;
+    margin-right: var(--space);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+  }
+
+  &__name,
+  &__links-item {
+    font-size: var(--fs-small);
+
+    a {
+      color: var(--c-p);
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__name a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__links {
+    display: flex;
+    list-style: none;
+  }
+
+  &__links-item + &__links-item {
+    &::before {
+      content: '·';
+      display: inline-block;
+      margin: 0 0.4em;
+    }
+  }
+}
