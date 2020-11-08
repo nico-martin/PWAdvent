@@ -26,7 +26,7 @@ CALENDAR.map(day => {
 
 const initialState: State = {
   offline: false,
-  menuOpen: false,
+  menuOpen: true,
   days: initialDays,
 };
 

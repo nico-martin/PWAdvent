@@ -1,5 +1,5 @@
 import React from 'react';
-import { Logo } from '@theme';
+import { Button, Logo } from '@theme';
 import { useActions } from 'unistore-hooks';
 
 import './CalendarHeader.css';
@@ -16,12 +16,15 @@ const CalendarHeader = ({ className = '' }: { className?: string }) => {
         alt="PWAdvent Logo"
         sameheight
       />
-      <button
+      <Button
         className="calendar-header__button"
         onClick={() => setMenuOpen(true)}
+        icon="mdi/menu"
+        ghost
+        round
       >
         Menu
-      </button>
+      </Button>
     </header>
   );
 };

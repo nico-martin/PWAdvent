@@ -7,11 +7,12 @@ import { actions, store } from '@store/index';
 
 import './App.css';
 
-import About from '@app/About';
+import About from '@app/About/About';
 import Calendar from '@app/Calendar/Calendar';
 
-import Content from '@app/Content';
+import Content from '@app/Content/Content';
 import { State } from '@store/types';
+import useWindowSize from '@app/hooks/useWindowSize';
 
 let startX = 0;
 let currentX = 0;
@@ -20,6 +21,17 @@ const touchLength = 100;
 const App = () => {
   const { setOffline, setMenuOpen } = useActions(actions);
   const { menuOpen } = useStoreState<State>(['menuOpen']);
+  const [isMobile, setIsMobile] = React.useState<boolean>(false);
+  const windowSize = useWindowSize();
+
+  React.useEffect(() => {
+    if (windowSize.width >= 1000 && isMobile) {
+      setMenuOpen(false);
+      setIsMobile(false);
+    } else if (windowSize.width < 1000) {
+      setIsMobile(true);
+    }
+  }, [windowSize]);
 
   React.useEffect(() => {
     setOffline(!navigator.onLine);
@@ -58,7 +70,11 @@ const App = () => {
   return (
     <React.Fragment>
       <Content className="app-content" />
-      <div data-menu={menuOpen ? 'open' : 'closed'} className="app">
+      <div
+        data-menu={menuOpen ? 'open' : 'closed'}
+        data-layout={isMobile ? 'mobile' : 'desktop'}
+        className="app"
+      >
         <div className="app__inner">
           <About className="app__sidebar" />
           <Calendar className="app__content" />

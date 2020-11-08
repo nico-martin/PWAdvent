@@ -1,0 +1,11 @@
+.about-controls {
+  list-style: none;
+
+  &__item {
+    text-align: center;
+  }
+
+  &__button {
+    display: inline-block;
+  }
+}

@@ -1,0 +1,10 @@
+.about {
+  &__controls {
+    margin-top: var(--space-l) !important;
+  }
+
+  &__logo {
+    width: 66%;
+    margin-bottom: var(--space-l);
+  }
+}

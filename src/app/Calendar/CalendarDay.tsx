@@ -5,8 +5,6 @@ import { useStoreState, useActions } from 'unistore-hooks';
 import { actions } from '@store/index';
 import { State } from '@store/types';
 
-import { getRandomNumber } from '@utils/helpers';
-
 import './CalendarDay.css';
 
 const CalendarDay = ({
@@ -47,13 +45,7 @@ const CalendarDay = ({
         isActive ? 'calendar-day--active' : ''
       }`}
     >
-      <div className="calendar-day__inner">
-        <div
-          className="calendar-day__shade"
-          style={{ opacity: getRandomNumber(0, 0.1) }}
-        />
-        <div className="calendar-day__content">{day}</div>
-      </div>
+      <div className="calendar-day__inner">{day}</div>
     </Wrapper>
   );
 };

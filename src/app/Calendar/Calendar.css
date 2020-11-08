@@ -1,7 +1,7 @@
 .calendar {
   position: relative;
   &__header {
-    padding-bottom: var(--space-l);
+    padding-bottom: var(--space-xl);
   }
 
   &__calendar {

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Logo, ShadowBox } from '@theme';
-import { DATE_TODAY } from '@utils/calendar';
+import AboutControls from '@app/About/AboutControls';
+
+import './About.css';
 
 const About = ({
   className = '',
@@ -13,13 +15,17 @@ const About = ({
   return (
     <article className={`${className} about`} {...props}>
       <header className="about__header">
-        <Logo title="PWAdvent Logo" alt="PWAdvent Logo" />
+        <Logo
+          className="about__logo"
+          title="PWAdvent Logo"
+          alt="PWAdvent Logo"
+        />
       </header>
       <p>
         From the 1st to the 24th of December 2020 we will introduce a new
         progressive browser feature every day.
       </p>
-      <Button onClick={() => setEmailBox(true)}>Notify</Button>
+      <AboutControls className="about__controls" setEmailBox={setEmailBox} />
       {emailBox && (
         <ShadowBox close={() => setEmailBox(false)}>
           Are you excited for Progressive Web Apps? Let's get ready for

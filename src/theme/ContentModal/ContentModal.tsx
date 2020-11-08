@@ -7,7 +7,7 @@ import './ContentModal.css';
 const ContentModal = ({
   title,
   children,
-  onClose,
+  onClose: close,
   className = '',
   loading = false,
 }: {
@@ -18,18 +18,28 @@ const ContentModal = ({
   loading?: boolean;
   [key: string]: any;
 }) => {
-  const active = true;
+  const [show, setShow] = React.useState<boolean>(false);
   const [shadow, setShadow] = React.useState<boolean>(false);
 
+  React.useEffect(() => {
+    setShow(true);
+    return () => {
+      setShow(false);
+    };
+  }, []);
+
+  const onClose = () => {
+    setShow(false);
+    window.setTimeout(() => {
+      close();
+    }, 200);
+  };
+
   return (
-    <div
-      className={`${className} content-modal ${
-        active ? 'content-modal--visible' : ''
-      }`}
-    >
-      <div className="content-modal__bkg" onClick={() => onClose()} />
+    <div className={`${className} content-modal`} data-visible={show}>
+      <div className="content-modal__shadow" onClick={() => onClose()} />
       <main
-        className="content-modal__inner"
+        className="content-modal__box"
         onScroll={e => {
           const scroll = (e.target as HTMLHtmlElement).scrollTop;
           if (shadow && scroll === 0) {

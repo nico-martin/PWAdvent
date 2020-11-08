@@ -5,18 +5,17 @@
   left: 0;
   top: 0;
   z-index: 10;
-  opacity: 0;
   transition: opacity 0.2s ease-in;
   will-change: opacity;
 
-  &__bkg {
+  &__shadow {
     position: absolute;
     bottom: 0;
     right: 0;
     left: 0;
     top: 0;
-    background-color: var(--c-shadow);
-    opacity: 0.5;
+    background-color: #000;
+    cursor: pointer;
   }
 
   &__header {
@@ -69,11 +68,11 @@
     font-size: 1.5rem;
   }
 
-  &__inner {
+  &__box {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translateX(-50%) translateY(-50%) scale(0.5);
+    transform: translateX(-50%) translateY(-50%);
     max-height: calc(100vh - (var(--space-l) * 2));
     width: 900px;
     max-width: calc(100vw - (var(--space-l) * 2));
@@ -98,11 +97,27 @@
     margin: 6vh 0 10vh 0;
   }
 
-  &--visible {
-    opacity: 1;
+  &__box,
+  &__shadow {
+    opacity: 0;
+    will-change: opacity;
+    transition: all 200ms ease-in-out;
+  }
 
-    .content-modal__inner {
-      transform: translateX(-50%) translateY(-50%) scale(1);
+  &__box {
+    transform: translateX(-50%) translateY(-30%) scale(0.9);
+  }
+
+  &[data-visible='true'] {
+    .content-modal {
+      &__box {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-50%) scale(1);
+      }
+
+      &__shadow {
+        opacity: 0.7;
+      }
     }
   }
 }

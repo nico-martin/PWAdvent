@@ -17,6 +17,7 @@
     box-shadow: 0 0 80px rgba(0, 0, 0, 0.6);
     max-height: 90vh;
     width: 600px;
+    max-width: 90vw;
     overflow-y: auto;
   }
 
@@ -36,7 +37,7 @@
   }
 
   &__box {
-    transform: translateX(-50%) translateY(-30%) scale(1);
+    transform: translateX(-50%) translateY(-30%) scale(0.9);
   }
 
   &__box,

@@ -3,12 +3,12 @@ import { useParams, useHistory, Route, Switch } from 'react-router-dom';
 
 import './Content.css';
 
-import { useStoreState, useActions } from 'unistore-hooks';
+import { useStoreState } from 'unistore-hooks';
 import { State } from '@store/types';
-import { ContentModal, Loader } from '@theme';
+import { ContentModal } from '@theme';
 import { Day } from '@app/types';
 
-import ContentCalendar from './Content/ContentCalendar';
+import ContentCalendar from './ContentCalendar';
 
 const Content = ({ className = '' }: { className?: string }) => {
   const { page = null, day = null } = useParams();

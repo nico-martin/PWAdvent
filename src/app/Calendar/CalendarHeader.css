@@ -1,15 +1,31 @@
 .calendar-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
+  transition: opacity 200ms ease-in-out;
+  opacity: 1;
+
+  &__button {
+    font-size: 0.8rem;
+  }
 
   &__logo {
-    svg {
-      height: 1rem;
-      width: auto;
+    width: 12rem;
+    max-width: 50%;
 
+    svg {
       path {
-        fill: currentColor !important;
+        //fill: currentColor !important;
       }
     }
   }
+}
+
+[data-menu='open'] .calendar-header {
+  opacity: 0.1;
+}
+
+[data-layout='desktop'] .calendar-header {
+  display: none;
 }
