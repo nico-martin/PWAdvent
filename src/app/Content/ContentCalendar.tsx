@@ -9,9 +9,11 @@ import { LazyImage } from '@theme';
 
 const ContentCalendar = ({
   day,
+  number,
   className = '',
 }: {
   day: DayData;
+  number: number;
   className?: string;
 }) => {
   const contentRef = React.useRef(null);
@@ -22,6 +24,9 @@ const ContentCalendar = ({
 
   return (
     <div className={`content-calendar ${className}`}>
+      <p className="content-calendar__date">
+        <b>Day {number}:</b> {day.date.format('L')}
+      </p>
       {day.excerpt && (
         <p className="content-calendar__excerpt">{day.excerpt}</p>
       )}

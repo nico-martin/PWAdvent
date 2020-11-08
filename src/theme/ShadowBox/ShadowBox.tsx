@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './ShadowBox.css';
+import { CloseButton } from '../index';
 
 const Portal = ({ children }: { children?: React.JSX.Element }) =>
   ReactDOM.createPortal(children, document.querySelector('#shadowbox'));
@@ -9,7 +10,7 @@ export default ({
   children,
   close,
 }: {
-  children?: React.JSX.Element | React.JSX.Element[];
+  children?: React.JSX.Element | React.JSX.Element[] | string;
   close: Function;
 }) => {
   const [show, setShow] = React.useState<boolean>(false);
@@ -33,9 +34,7 @@ export default ({
       <div className="shadowbox" data-visible={show}>
         <div className="shadowbox__shadow" onClick={onClose} />
         <div className="shadowbox__box">
-          <button className="shadowbox__close" onClick={onClose}>
-            Close
-          </button>
+          <CloseButton className="shadowbox__close" onClick={onClose} />
           <div className="shadowbox__content">{children}</div>
         </div>
       </div>

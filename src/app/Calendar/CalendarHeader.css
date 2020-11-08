@@ -1,0 +1,15 @@
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+
+  &__logo {
+    svg {
+      height: 1rem;
+      width: auto;
+
+      path {
+        fill: currentColor !important;
+      }
+    }
+  }
+}

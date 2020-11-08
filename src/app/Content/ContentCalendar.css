@@ -10,6 +10,10 @@
     display: block;
   }
 
+  &__date {
+    margin-bottom: var(--space);
+  }
+
   &__author,
   &__excerpt,
   &__image {

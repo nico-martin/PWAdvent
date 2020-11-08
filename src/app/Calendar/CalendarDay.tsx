@@ -5,8 +5,6 @@ import { useStoreState, useActions } from 'unistore-hooks';
 import { actions } from '@store/index';
 import { State } from '@store/types';
 
-import { THEMEN } from '@utils/calendar';
-
 import { getRandomNumber } from '@utils/helpers';
 
 import './CalendarDay.css';
@@ -50,16 +48,11 @@ const CalendarDay = ({
       }`}
     >
       <div className="calendar-day__inner">
-        <div className="calendar-day__front">
-          <div
-            className="calendar-day__shade"
-            style={{ opacity: getRandomNumber(0, 0.1) }}
-          />
-          <div className="calendar-day__content">{day}</div>
-        </div>
-        <div className="calendar-day__back">
-          <div className="calendar-day__content">{THEMEN[day - 1]}</div>
-        </div>
+        <div
+          className="calendar-day__shade"
+          style={{ opacity: getRandomNumber(0, 0.1) }}
+        />
+        <div className="calendar-day__content">{day}</div>
       </div>
     </Wrapper>
   );

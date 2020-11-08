@@ -33,7 +33,7 @@ const Content = ({ className = '' }: { className?: string }) => {
         onClose={() => push('/')}
         loading={activeDay.loading}
       >
-        <ContentCalendar day={activeDay.data} />
+        <ContentCalendar day={activeDay.data} number={day} />
       </ContentModal>
     );
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import { Provider, useActions, useStoreState } from 'unistore-hooks';
 import { actions, store } from '@store/index';
@@ -8,15 +8,18 @@ import { actions, store } from '@store/index';
 import './App.css';
 
 import About from '@app/About';
-import CalendarDay from '@app/calendar/CalendarDay';
-import { zeroPad } from '@utils/helpers';
-import FooterMenu from '@app/FooterMenu';
+import Calendar from '@app/Calendar/Calendar';
+
 import Content from '@app/Content';
 import { State } from '@store/types';
 
+let startX = 0;
+let currentX = 0;
+const touchLength = 100;
+
 const App = () => {
-  const { setOffline } = useActions(actions);
-  const { days: storeDays } = useStoreState<State>(['days']);
+  const { setOffline, setMenuOpen } = useActions(actions);
+  const { menuOpen } = useStoreState<State>(['menuOpen']);
 
   React.useEffect(() => {
     setOffline(!navigator.onLine);
@@ -24,27 +27,44 @@ const App = () => {
     window.addEventListener('offline', () => setOffline(true), false);
   }, []);
 
+  const touchStart = e => {
+    startX = e.touches[0].clientX;
+  };
+  const touchEnd = () => {
+    const moved = currentX === 0 ? 0 : currentX - startX;
+    if (moved <= touchLength * -1) {
+      setMenuOpen(false);
+    } else if (moved >= touchLength) {
+      setMenuOpen(true);
+    }
+    startX = 0;
+    currentX = 0;
+  };
+  const touchMove = e => {
+    currentX = e.touches[0].clientX;
+  };
+
+  React.useEffect(() => {
+    window.addEventListener('touchstart', touchStart);
+    window.addEventListener('touchend', touchEnd);
+    window.addEventListener('touchmove', touchMove);
+    return () => {
+      window.removeEventListener('touchstart', touchStart);
+      window.removeEventListener('touchend', touchEnd);
+      window.removeEventListener('touchmove', touchMove);
+    };
+  }, []);
+
   return (
-    <div className="app">
-      <Content className="app__content" />
-      <div className="app__grid app-grid">
-        <About
-          style={{ gridArea: 'about' }}
-          className="app-grid__item app-grid__item--about"
-        />
-        {Object.keys(storeDays).map(day => (
-          <div
-            style={{ gridArea: `cal${zeroPad(parseInt(day), 2)}` }}
-            className={`app-grid__item app-grid__item--calendar app-grid__item--calendar-${day}`}
-          >
-            <CalendarDay day={parseInt(day)} />
-          </div>
-        ))}
+    <React.Fragment>
+      <Content className="app-content" />
+      <div data-menu={menuOpen ? 'open' : 'closed'} className="app">
+        <div className="app__inner">
+          <About className="app__sidebar" />
+          <Calendar className="app__content" />
+        </div>
       </div>
-      <footer className="app__footer">
-        <FooterMenu className="app__footer-manu" />
-      </footer>
-    </div>
+    </React.Fragment>
   );
 };
 

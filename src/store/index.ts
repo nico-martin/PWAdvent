@@ -26,6 +26,7 @@ CALENDAR.map(day => {
 
 const initialState: State = {
   offline: false,
+  menuOpen: false,
   days: initialDays,
 };
 
@@ -103,6 +104,7 @@ export const actions = (store: Store<State>) => ({
       data: dayObject,
     });
   },
+  setMenuOpen: (state, menuOpen: boolean) => store.setState({ menuOpen }),
 });
 
 export const store = isDev

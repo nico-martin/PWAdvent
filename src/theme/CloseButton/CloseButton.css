@@ -1,9 +1,10 @@
 .close-button {
   position: relative;
-  width: 1em;
-  height: 1em;
+  width: 1.5em;
+  height: 1.5em;
   text-indent: -9999px;
   cursor: pointer;
+  border-radius: 50%;
 
   &::after,
   &::before {
@@ -12,12 +13,17 @@
     top: 50%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%) rotate(45deg);
-    width: 100%;
+    width: 60%;
     height: 1px;
     background-color: currentColor;
   }
 
   &::before {
     transform: translateY(-50%) translateX(-50%) rotate(-45deg);
+  }
+
+  &:focus {
+    background-color: #e2e2e2;
+    opacity: 1;
   }
 }

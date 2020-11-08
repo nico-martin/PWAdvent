@@ -1,0 +1,47 @@
+.calendar {
+  position: relative;
+  &__header {
+    padding-bottom: var(--space-l);
+  }
+
+  &__calendar {
+    display: grid;
+    grid-template-areas:
+      'cal01 cal02 cal03 cal04 cal05'
+      'cal06 cal07 cal08 cal09 cal10'
+      'cal11 cal12 cal13 cal14 cal15'
+      'cal16 cal17 cal18 cal19 cal20'
+      'cal21 cal22 cal23 cal24 cal24';
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
+    grid-gap: var(--space-s);
+
+    @media (orientation: portrait) {
+      grid-template-areas:
+        'cal01 cal02 cal03 cal04'
+        'cal05 cal06 cal07 cal08'
+        'cal09 cal10 cal11 cal12'
+        'cal13 cal14 cal15 cal16'
+        'cal17 cal18 cal19 cal20'
+        'cal21 cal22 cal23 cal24';
+      grid-gap: var(--space-xs);
+    }
+
+    &__item {
+      position: relative;
+    }
+  }
+
+  &__button-overlay {
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+    text-indent: -9999px;
+  }
+}
