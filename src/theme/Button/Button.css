@@ -9,21 +9,50 @@
   align-items: center;
 
   &__icon {
+    color: #fff;
+    will-change: opacity;
+    transition: opacity 200ms ease-in-out;
+
     &--left {
-      margin-right: 0.4em;
+      margin-right: 0.6em;
     }
 
     &--right {
-      margin-left: 0.4em;
+      margin-left: 0.6em;
     }
   }
 
-  &--ghost {
-    border: 1px solid currentColor;
-    background-color: transparent;
+  &--type {
+    &-ghost,
+    &-empty {
+      border: 1px solid currentColor;
+      background-color: transparent;
 
-    .button__content {
-      color: currentColor;
+      .button {
+        &__content,
+        &__icon,
+        &__loader {
+          color: currentColor;
+        }
+
+        &__icon {
+          transform: scale(1.3);
+        }
+      }
+    }
+
+    &-empty {
+      border: none;
+    }
+  }
+
+  &--size {
+    &-small {
+      font-size: 0.8rem;
+    }
+
+    &-large {
+      font-size: 1.2rem;
     }
   }
 
@@ -31,15 +60,50 @@
     border-radius: 5rem;
   }
 
-  transition: background-color 200ms ease-in-out;
+  &--disabled {
+    pointer-events: none;
+    opacity: 0.8;
+  }
+
+  transition: all 200ms ease-in-out;
 
   &:hover {
     //background-color: var(--c-hellgrau);
+  }
+
+  &__loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 1em;
+    height: 1em;
+    color: #fff;
+    opacity: 0;
+    will-change: opacity;
+    transition: opacity 200ms ease-in-out;
+    pointer-events: none;
   }
 
   &__content {
     position: relative;
     z-index: 1;
     color: #fff;
+    opacity: 1;
+    will-change: opacity;
+    transition: opacity 200ms ease-in-out;
+  }
+
+  &--loading {
+    .button {
+      &__loader {
+        opacity: 1;
+      }
+
+      &__content,
+      &__icon {
+        opacity: 0;
+      }
+    }
   }
 }

@@ -11,6 +11,7 @@ const Icon = ({
   rotate = false,
   button = false,
   round = false,
+  circle = false,
   ...props
 }: {
   icon: string;
@@ -19,17 +20,18 @@ const Icon = ({
   spinning?: boolean;
   button?: boolean;
   round?: boolean;
+  circle?: boolean;
   [key: string]: any;
 }) => {
   return (
     <SVG
-      className={`${className} icon ${
-        rotate !== false ? `icon--rotate-${rotate}` : ''
-      } ${cn({
+      className={cn(className, 'icon', {
+        [`icon--rotate-${rotate}`]: rotate !== false,
         'icon--animation-spin': spinning,
         'icon--button': button,
         'icon--round': round,
-      })}`}
+        'icon--circle': circle,
+      })}
       path={`icon/${icon}.svg`}
       {...props}
     />

@@ -1,5 +1,5 @@
-@define-mixin spinner $size: 2rem, $border: 0.08em solid currentColor,
-$duration: 0.65s, $background: transparent {
+@define-mixin spinner $size: 1em, $border: 0.08em solid currentColor,
+  $duration: 0.65s, $background: transparent {
   background-color: transparent;
   border: $border;
   border-radius: 50%;
@@ -8,7 +8,7 @@ $duration: 0.65s, $background: transparent {
   font-size: $size;
   width: $size;
   height: $size;
-  display: inline-block;
+  display: block;
   vertical-align: middle;
   box-sizing: border-box;
   animation: spinner $duration infinite linear;

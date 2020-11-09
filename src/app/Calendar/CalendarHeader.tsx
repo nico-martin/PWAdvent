@@ -20,8 +20,9 @@ const CalendarHeader = ({ className = '' }: { className?: string }) => {
         className="calendar-header__button"
         onClick={() => setMenuOpen(true)}
         icon="mdi/menu"
-        ghost
+        layout="ghost"
         round
+        size="small"
       >
         Menu
       </Button>

@@ -4,7 +4,7 @@
   height: 100%;
   position: relative;
   display: block;
-  border: 2px dashed var(--c-inactive);
+  border: 2px dashed var(--c-border);
   color: var(--c-p);
   text-decoration: none;
   padding: var(--space-grid);

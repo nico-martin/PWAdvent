@@ -1,10 +1,26 @@
 .about {
   &__controls {
-    margin-top: var(--space-l) !important;
+    margin-top: var(--space-xl) !important;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--space-l);
   }
 
   &__logo {
     width: 66%;
-    margin-bottom: var(--space-l);
+    padding-right: var(--space-l);
   }
+
+  &__description {
+    & > * + * {
+      margin-top: 0.5em;
+    }
+  }
+}
+
+[data-layout='desktop'] .about__button {
+  display: none;
 }

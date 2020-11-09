@@ -1,11 +1,10 @@
 .about-controls {
   list-style: none;
+  border-bottom: 1px solid var(--c-border);
 
   &__item {
-    text-align: center;
-  }
-
-  &__button {
-    display: inline-block;
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid var(--c-border);
   }
 }

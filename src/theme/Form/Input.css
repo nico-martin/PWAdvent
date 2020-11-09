@@ -1,0 +1,55 @@
+input {
+  /* resets */
+
+  &[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
+
+.input {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  &__label {
+    font-weight: bold;
+    color: var(--c-p-light);
+    font-size: var(--fs-s);
+    margin-bottom: 0.6em;
+  }
+
+  &__element {
+    display: block;
+    width: 100%;
+    border-radius: var(--form-input-border-radius);
+    border: 1px solid var(--c-gray-light);
+    color: var(--c-p-light);
+    line-height: 1.25;
+    padding: 0.8em 1em;
+    outline: none;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+    }
+  }
+
+  &--error {
+    .input__element {
+      //border-color: var(--c-feedback-error) !important;
+    }
+  }
+
+  &__error {
+    color: var(--c-feedback-error);
+    font-size: var(--fs-xs);
+    margin-top: 0.5em;
+    text-align: right;
+    width: 100%;
+    position: absolute;
+    right: 0;
+    bottom: -0.5em;
+    transform: translateY(100%);
+  }
+}

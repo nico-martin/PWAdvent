@@ -6,19 +6,9 @@
   transition: opacity 200ms ease-in-out;
   opacity: 1;
 
-  &__button {
-    font-size: 0.8rem;
-  }
-
   &__logo {
     width: 12rem;
     max-width: 50%;
-
-    svg {
-      path {
-        //fill: currentColor !important;
-      }
-    }
   }
 }
 
