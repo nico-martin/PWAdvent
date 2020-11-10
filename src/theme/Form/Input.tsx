@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from '@utils/classnames';
 
 import './Input.css';
 
@@ -40,14 +41,19 @@ const Input = ({
 
   const inputProps = {
     ...props,
-    className: `${classNameInput} input__element input__element--${type} input__element--${
-      value !== '' ||
-      (type === 'select' &&
-        Object.values(choices).length &&
-        Object.values(choices)[0] !== '')
-        ? 'value'
-        : 'empty'
-    }`,
+    className: cn(
+      classNameInput,
+      'input__element',
+      `input__element--${type}`,
+      `input__element--${
+        value !== '' ||
+        (type === 'select' &&
+          Object.values(choices).length &&
+          Object.values(choices)[0] !== '')
+          ? 'value'
+          : 'empty'
+      }`
+    ),
     name,
     id,
     onChange: e => {
@@ -63,11 +69,11 @@ const Input = ({
 
   return (
     <div
-      className={`${className} input input--${type} ${
-        error !== '' ? 'input--error' : ''
-      }`}
+      className={cn(className, 'input', `input--${type}`, {
+        'input--error': error !== '',
+      })}
     >
-      <label className={`${classNameLabel} input__label`} htmlFor={id}>
+      <label className={cn(classNameLabel, 'input__label')} htmlFor={id}>
         {label}
       </label>
       {type === 'textarea' && <textarea {...inputProps}>{value}</textarea>}

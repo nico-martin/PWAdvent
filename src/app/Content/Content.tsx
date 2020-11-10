@@ -11,15 +11,15 @@ import { Day } from '@app/types';
 import ContentCalendar from './ContentCalendar';
 
 const Content = ({ className = '' }: { className?: string }) => {
-  const { page = null, day = null } = useParams();
+  const { page = null, slug = null } = useParams();
   const { push } = useHistory();
 
   const { days: storeDays } = useStoreState<State>(['days']);
 
   const active: boolean = React.useMemo(() => !!page, [page]);
   const activeDay: Day = React.useMemo(
-    () => (active !== false && storeDays[day]) || false,
-    [active, storeDays[day], day]
+    () => (active !== false && page === 'day' && storeDays[slug]) || false,
+    [active, storeDays[slug], slug]
   );
 
   if (!active) {
@@ -33,7 +33,29 @@ const Content = ({ className = '' }: { className?: string }) => {
         onClose={() => push('/')}
         loading={activeDay.loading}
       >
-        <ContentCalendar day={activeDay.data} number={day} />
+        <ContentCalendar day={activeDay.data} number={slug} />
+      </ContentModal>
+    );
+  }
+
+  if (page === 'email-notification') {
+    return (
+      <ContentModal
+        className={className}
+        onClose={() => push('/')}
+        title="Email Notification"
+        size="small"
+      >
+        {slug === 'success' ? (
+          <p>
+            Thank you very much. Your email address has been successfully
+            verified.
+          </p>
+        ) : slug === 'unsubscribe' ? (
+          <p>You have been successfully signed out.</p>
+        ) : (
+          <p>Ooops.. Something went wrong.</p>
+        )}
       </ContentModal>
     );
   }
@@ -83,7 +105,7 @@ const Content = ({ className = '' }: { className?: string }) => {
 
 export default props => (
   <Switch>
-    <Route path="/:page/:day?/">
+    <Route path="/:page/:slug?/">
       <Content {...props} />
     </Route>
   </Switch>

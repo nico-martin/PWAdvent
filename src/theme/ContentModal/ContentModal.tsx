@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { CloseButton, Loader } from '../index';
+import cn from '@utils/classnames';
 
 import './ContentModal.css';
 
@@ -10,12 +11,14 @@ const ContentModal = ({
   onClose: close,
   className = '',
   loading = false,
+  size = 'large',
 }: {
   title: string;
   children?: React.JSX.Element | React.JSX.Element[] | string;
   onClose: Function;
   className?: string;
   loading?: boolean;
+  size?: 'large' | 'small';
   [key: string]: any;
 }) => {
   const [show, setShow] = React.useState<boolean>(false);
@@ -36,7 +39,10 @@ const ContentModal = ({
   };
 
   return (
-    <div className={`${className} content-modal`} data-visible={show}>
+    <div
+      className={cn(className, 'content-modal', `content-modal--${size}`)}
+      data-visible={show}
+    >
       <div className="content-modal__shadow" onClick={() => onClose()} />
       <main
         className="content-modal__box"

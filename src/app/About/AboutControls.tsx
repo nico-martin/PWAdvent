@@ -1,11 +1,15 @@
 import React from 'react';
+
 import { Button, ShadowBox } from '@theme';
 
 import './AboutControls.css';
 import EmailSignup from '@app/About/EmailSignup';
+import { DATE_TODAY, DATE_START } from '@utils/calendar';
 
 const AboutControls = ({ className = '' }: { className?: string }) => {
-  const [emailBox, setEmailBox] = React.useState<boolean>(true);
+  const [emailBox, setEmailBox] = React.useState<boolean>(
+    DATE_TODAY.isBefore(DATE_START) && window.location.pathname === '/'
+  );
 
   return (
     <React.Fragment>

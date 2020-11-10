@@ -89,12 +89,22 @@
     }
   }
 
+  &--small {
+    .content-modal {
+      &__box {
+        width: 500px;
+      }
+    }
+  }
+
   &__content {
     padding: var(--space) var(--space-l) var(--space-l) var(--space-l);
   }
 
   &__loader {
-    margin: 6vh 0 10vh 0;
+    margin: 6vh auto 10vh auto;
+    font-size: 2rem;
+    width: 2rem;
   }
 
   &__box,

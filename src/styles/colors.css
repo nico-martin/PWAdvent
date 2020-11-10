@@ -8,4 +8,6 @@
   --c-primary-dark: #994d4d;
   --c-secondary: #355454;
   --c-border: rgba(106, 106, 106, 0.42);
+  --c-feedback-error: var(--c-primary);
+  --c-feedback-success: var(--c-secondary);
 }

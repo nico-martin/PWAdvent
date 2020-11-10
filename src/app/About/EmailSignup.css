@@ -1,5 +1,15 @@
 .email-signup {
-  & > * + * {
-    margin-top: 0.5em;
+  &__content {
+    & > * + * {
+      margin-top: 0.5em;
+    }
+  }
+
+  &__form {
+    margin-top: var(--space);
+  }
+
+  &__notification {
+    margin-top: var(--space-xl);
   }
 }

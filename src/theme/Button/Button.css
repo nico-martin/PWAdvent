@@ -71,6 +71,10 @@
     //background-color: var(--c-hellgrau);
   }
 
+  &:focus {
+    @mixin a11y-focus;
+  }
+
   &__loader {
     position: absolute;
     left: 50%;

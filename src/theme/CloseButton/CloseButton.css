@@ -22,8 +22,12 @@
     transform: translateY(-50%) translateX(-50%) rotate(-45deg);
   }
 
-  &:focus {
+  &:hover {
     background-color: #e2e2e2;
     opacity: 1;
+  }
+
+  &:focus {
+    @mixin a11y-focus;
   }
 }

@@ -7,6 +7,7 @@ export { default as LazyImage } from './Image/LazyImage';
 export { default as Logo } from './Logo/Logo';
 export { default as Loader } from './Loader/Loader';
 export { default as ContentModal } from './ContentModal/ContentModal';
+export { default as Notification } from './Misc/Notification';
 
 // Form
 
