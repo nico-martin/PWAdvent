@@ -5,7 +5,7 @@ import './ContentCalendar.css';
 
 import Prism from '@utils/prism';
 import ContentAuthor from '@app/Content/ContentAuthor';
-import { LazyImage } from '@theme';
+import { Button, LazyImage } from '@theme';
 
 const ContentCalendar = ({
   day,
@@ -25,7 +25,7 @@ const ContentCalendar = ({
   return (
     <div className={`content-calendar ${className}`}>
       <p className="content-calendar__date">
-        <b>Day {number}:</b> {day.date.format('L')}
+        <b>Day {number}:</b> {day.date.format && day.date.format('L')}
       </p>
       {day.excerpt && (
         <p className="content-calendar__excerpt">{day.excerpt}</p>
@@ -46,6 +46,23 @@ const ContentCalendar = ({
           __html: day.content,
         }}
       />
+      {'share' in navigator && (
+        <Button
+          className="content-calendar__share"
+          onClick={() =>
+            navigator.share({
+              url: window.location.href,
+              text: 'Have a look at the awesome feature',
+              title: `${day.title} - PWAdvent`,
+            })
+          }
+          layout="ghost"
+          round
+          icon="mdi/share"
+        >
+          Tell a friend
+        </Button>
+      )}
     </div>
   );
 };

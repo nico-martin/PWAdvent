@@ -1,4 +1,5 @@
 import { openDB, DBSchema } from 'idb';
+import { DayData } from '@app/types';
 
 const dbName = 'pwadvent';
 
@@ -7,12 +8,17 @@ interface PWAdventDB extends DBSchema {
     key: string;
     value: any;
   };
+  page: {
+    key: string;
+    value: DayData;
+  };
 }
 
 const dbPromise = openDB<PWAdventDB>(dbName, 1, {
   upgrade(db, oldVersion) {
     if (oldVersion < 1) {
       db.createObjectStore('days');
+      db.createObjectStore('page');
     }
   },
 });
@@ -21,4 +27,10 @@ export const daysDB = {
   get: async (key: string) => (await dbPromise).get('days', key),
   set: async (key: string, val: any) => (await dbPromise).put('days', val, key),
   delete: async (key: string) => (await dbPromise).delete('days', key),
+};
+
+export const pageDB = {
+  get: async (key: string) => (await dbPromise).get('page', key),
+  set: async (key: string, val: any) => (await dbPromise).put('page', val, key),
+  delete: async (key: string) => (await dbPromise).delete('page', key),
 };

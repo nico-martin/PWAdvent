@@ -6,6 +6,7 @@ import AboutControls from '@app/About/AboutControls';
 
 import './About.css';
 import { actions } from '@store/index';
+import AboutNavigation from '@app/About/AboutNavigation';
 
 const About = ({
   className = '',
@@ -26,7 +27,7 @@ const About = ({
         <Button
           onClick={() => setMenuOpen(false)}
           className="about__button"
-          type="ghost"
+          layout="ghost"
           icon="mdi/calendar-month"
           round
           size="small"
@@ -36,15 +37,18 @@ const About = ({
       </header>
       <div className="about__description">
         <p>
-          Christmas is the perfect time to take a look at all the great stuff
-          the web has to offer.
+          PWAdvent is the perfect advent calendar for everyone who's excited
+          about the web platform. Take a look at all the great stuff the web has
+          to offer.
         </p>
         <p>
           From the 1st to the 24th of December 2020 we will introduce a new
-          progressive browser feature every day.
+          progressive browser feature every day — stay tuned for a set of
+          features you most certainly did not know the web is capable of.
         </p>
       </div>
       <AboutControls className="about__controls" />
+      <AboutNavigation className="about__navigation" />
     </article>
   );
 };

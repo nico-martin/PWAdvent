@@ -1,5 +1,6 @@
 .about {
-  &__controls {
+  &__controls,
+  &__navigation {
     margin-top: var(--space-xl) !important;
   }
 

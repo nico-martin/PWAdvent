@@ -7,8 +7,8 @@ const app = {
   title: 'PWAdvent',
   short: 'PWAdvent',
   description: 'A progressive advent calendar',
-  colorbkg: '#cc0033',
-  color: '#cc0033',
+  colorbkg: '#f1dfd4',
+  color: '#cb5454',
 };
 
 import { DefinePlugin } from 'webpack';
@@ -100,14 +100,15 @@ module.exports = (env, argv) => {
               theme_color: app.color,
               background_color: app.colorbkg,
               crossorigin: 'use-credentials',
+              start_url: '/',
               fingerprints: false,
               icons: [
                 {
-                  src: path.resolve(`${dirSrc}/assets/bekb-logo.png`),
+                  src: path.resolve(`${dirSrc}/assets/pwadvent-appicon.png`),
                   sizes: [96, 128, 192, 256, 384, 512],
                   destination: path.join('assets', 'pwa-icon'),
                   ios: true,
-                  purpose: 'maskable',
+                  purpose: 'maskable any',
                 },
               ],
             }),
@@ -124,6 +125,7 @@ module.exports = (env, argv) => {
         API_BASE: JSON.stringify(
           process.env.API_BASE || 'https://api.pwadvent.dev/'
         ),
+        API_KEY: JSON.stringify(process.env.API_KEY) || null,
       }),
     ],
     module: {

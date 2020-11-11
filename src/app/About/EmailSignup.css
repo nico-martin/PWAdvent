@@ -12,4 +12,9 @@
   &__notification {
     margin-top: var(--space-xl);
   }
+
+  &__disclaimer {
+    margin-top: var(--space);
+    font-size: var(--fs-xsmall);
+  }
 }
