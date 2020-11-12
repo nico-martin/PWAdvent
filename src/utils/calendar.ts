@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import dayjs from '@utils/dayjs';
 
 export const YEAR: number = 2020;
 export const CALENDAR: number[] = [

@@ -15,9 +15,9 @@ CALENDAR.map(day => {
   initialDays[day] = {
     loading: false,
     error: '',
-    active: false,
+    loaded: false,
     data: {
-      date: dayjs(`${YEAR}-12-${zeroPad(day, 2)}`),
+      date: `${YEAR}-12-${zeroPad(day, 2)}`,
       title: '',
       content: '',
     },
@@ -83,7 +83,7 @@ export const actions = (store: Store<State>) => ({
       !storeDay ||
       !storeDay.data ||
       !storeDay.data.date ||
-      storeDay.data.date.isAfter(DATE_TODAY)
+      dayjs(storeDay.data.date).isAfter(DATE_TODAY)
     ) {
       return;
     }
@@ -96,7 +96,7 @@ export const actions = (store: Store<State>) => ({
     if (dayObject) {
       setDay(day, store, {
         loading: false,
-        active: true,
+        loaded: true,
         data: dayObject,
       });
     }
@@ -140,10 +140,10 @@ export const actions = (store: Store<State>) => ({
 
     setDay(day, store, {
       loading: false,
-      active: true,
+      loaded: true,
       data: dayObject,
     });
-    await daysDB.set(String(day), dayObject);
+    await daysDB.set(String(day), { ...dayObject });
   },
   setMenuOpen: (state, menuOpen: boolean) => store.setState({ menuOpen }),
   loadPage: async (state, slug: string) => {
