@@ -22,15 +22,22 @@ const App = () => {
   const { setOffline, setMenuOpen } = useActions(actions);
   const { menuOpen } = useStoreState<State>(['menuOpen']);
   const [isMobile, setIsMobile] = React.useState<boolean>(false);
+  const [transition, setTransition] = React.useState<boolean>(false);
   const windowSize = useWindowSize();
+  const [show, setShow] = React.useState<boolean>(false);
 
   React.useEffect(() => {
+    if (windowSize.width === null) {
+      return;
+    }
     if (windowSize.width >= 1000 && isMobile) {
       setMenuOpen(false);
       setIsMobile(false);
     } else if (windowSize.width < 1000) {
+      setTimeout(() => setTransition(true), 200);
       setIsMobile(true);
     }
+    setShow(true);
   }, [windowSize]);
 
   React.useEffect(() => {
@@ -73,7 +80,9 @@ const App = () => {
       <div
         data-menu={menuOpen ? 'open' : 'closed'}
         data-layout={isMobile ? 'mobile' : 'desktop'}
+        data-layout-transition={transition}
         className="app"
+        style={{ opacity: show ? 1 : 0 }}
       >
         <div className="app__inner">
           <About className="app__sidebar" />

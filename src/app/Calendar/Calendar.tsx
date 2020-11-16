@@ -14,6 +14,7 @@ const Calendar = ({ className = '' }: { className?: string }) => {
   const window = useWindowSize();
   const calendarRef = React.useRef(null);
   const [height, setHeight] = React.useState<number>(null);
+  //const [opacity, setOpacity] = React.useState<1 | 0>(0);
   const { setMenuOpen } = useActions(actions);
   const { days: storeDays, menuOpen } = useStoreState<State>([
     'days',
@@ -21,13 +22,14 @@ const Calendar = ({ className = '' }: { className?: string }) => {
   ]);
 
   React.useEffect(() => {
-    if (calendarRef.current) {
+    if (calendarRef.current && window.width) {
       setHeight(
         Math.round(
           calendarRef.current.clientWidth *
             (window.height / window.width >= 1 ? 1.3 : 0.9)
         )
       );
+      //setTimeout(() => setOpacity(1), 200);
     }
   }, [window, calendarRef]);
 
