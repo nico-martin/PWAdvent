@@ -3,13 +3,7 @@ import fs from 'fs';
 
 require('dotenv').config();
 
-const app = {
-  title: 'PWAdvent',
-  short: 'PWAdvent',
-  description: 'A progressive advent calendar',
-  colorbkg: '#f1dfd4',
-  color: '#cb5454',
-};
+import app from './app.json';
 
 import { DefinePlugin } from 'webpack';
 
@@ -126,6 +120,8 @@ module.exports = (env, argv) => {
           process.env.API_BASE || 'https://api.pwadvent.dev/'
         ),
         API_KEY: JSON.stringify(process.env.API_KEY) || null,
+        APP_TITLE: JSON.stringify(app.title) || '',
+        APP_DESCRIPTION: JSON.stringify(app.description) || '',
       }),
     ],
     module: {

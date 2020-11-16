@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, useHistory, Route, Switch } from 'react-router-dom';
+import Helmet from 'react-helmet';
 
 import './Content.css';
 
@@ -10,6 +11,8 @@ import { Day } from '@app/types';
 
 import ContentCalendar from './ContentCalendar';
 import ContentPage from './ContentPage';
+import { appDescription, appTitle } from '@utils/constants';
+import { metaTitle } from '@utils/metas';
 
 const Content = ({ className = '' }: { className?: string }) => {
   const { page = null, slug = null } = useParams();
@@ -24,7 +27,11 @@ const Content = ({ className = '' }: { className?: string }) => {
   );
 
   if (!active) {
-    return null;
+    return (
+      <Helmet>
+        <title>{metaTitle()}</title>
+      </Helmet>
+    );
   }
 
   if (activeDay) {
@@ -68,7 +75,7 @@ const Content = ({ className = '' }: { className?: string }) => {
 
 export default props => (
   <Switch>
-    <Route path="/:page/:slug?/">
+    <Route path="/:page?/:slug?/">
       <Content {...props} />
     </Route>
   </Switch>
