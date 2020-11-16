@@ -10,12 +10,14 @@
   "license": "MIT",
   "scripts": {
     "dev": "npm run serve & npm run build",
-    "prod": "npm run build:prod",
+    "prod": "npm run build:prod && npm run serve:prod",
     "build": "webpack -d --watch",
     "build:prod": "webpack -p",
-    "serve": "webpack-dev-server --open"
+    "serve": "webpack-dev-server --open",
+    "serve:prod": "spa-server"
   },
   "dependencies": {
+    "@nico-martin/spa-server": "^0.2.0",
     "axios": "^0.20.0",
     "dayjs": "^1.9.3",
     "idb": "^5.0.7",
