@@ -78,7 +78,7 @@ module.exports = (env, argv) => {
         title: app.title,
         description: app.description,
         template: 'src/index.html',
-        filename: './index.html',
+        filename: dev ? './index.html' : './index-serve.html',
         chunksSortMode: 'none',
         minify: dev
           ? false
