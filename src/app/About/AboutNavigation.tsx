@@ -10,7 +10,7 @@ const AboutNavigation = ({ className = '' }: { className?: string }) => (
     {Object.entries({
       legal: 'Legal',
       privacy: 'Privacy',
-      techstack: 'Tech',
+      credits: 'Credits',
     }).map(([slug, title]) => (
       <Link className="about-navigation__item" to={`/${slug}/`}>
         {title}

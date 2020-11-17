@@ -28,18 +28,18 @@ interface Author {
 }
 
 export interface DayData {
-  date: dayjs.Dayjs;
+  date: string;
   title: string;
-  excerpt: string;
+  excerpt?: string;
   content: string;
   author?: Author;
-  image: ApiImage;
+  image?: ApiImage;
 }
 
 export interface Day {
   loading: boolean;
   error: string;
-  active: boolean;
+  loaded: boolean;
   data: DayData;
 }
 

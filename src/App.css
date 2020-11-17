@@ -5,6 +5,8 @@
   height: 100vh;
   padding: var(--space) 0;
   overflow: hidden;
+  will-change: opacity;
+  transition: opacity 100ms ease-in;
 
   &__inner {
     display: flex;
@@ -39,7 +41,11 @@
       width: calc(100% + var(--menu-width));
       transform: translateX(calc(var(--menu-width) * -1));
     }
+  }
+}
 
+[data-layout-transition='true'] {
+  .app {
     &__inner,
     &__content {
       will-change: transform;

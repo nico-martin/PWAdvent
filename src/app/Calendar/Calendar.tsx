@@ -21,7 +21,7 @@ const Calendar = ({ className = '' }: { className?: string }) => {
   ]);
 
   React.useEffect(() => {
-    if (calendarRef.current) {
+    if (calendarRef.current && window.width) {
       setHeight(
         Math.round(
           calendarRef.current.clientWidth *

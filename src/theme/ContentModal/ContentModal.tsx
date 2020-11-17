@@ -1,9 +1,11 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 
 import { CloseButton, Loader } from '../index';
 import cn from '@utils/classnames';
 
 import './ContentModal.css';
+import { metaTitle } from '@utils/metas';
 
 const ContentModal = ({
   title,
@@ -43,6 +45,9 @@ const ContentModal = ({
       className={cn(className, 'content-modal', `content-modal--${size}`)}
       data-visible={show}
     >
+      <Helmet>
+        <title>{metaTitle(title)}</title>
+      </Helmet>
       <div className="content-modal__shadow" onClick={() => onClose()} />
       <main
         className="content-modal__box"
