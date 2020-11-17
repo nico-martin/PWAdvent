@@ -91,7 +91,7 @@ spaServer({
       },
     },
   ],
-  port: parseInt(process.env.PORT) || 8080,
+  port: parseInt(process.env.PORT) || 80,
   indexFile: 'index-serve.html',
   serveDir: 'dist/',
   logLevel: 'ERROR',
