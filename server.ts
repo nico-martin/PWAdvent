@@ -1,6 +1,7 @@
 import app from './app.json';
 require('dotenv').config();
 
+import spaServer from '@nico-martin/spa-server';
 import fetch from 'node-fetch';
 
 const apiBase = process.env.API_BASE || 'https://api.pwadvent.dev/';
@@ -11,7 +12,7 @@ const dayUrl = day =>
   }`;
 const pageUrl = slug => `${apiBase}wp-json/advent-calendar/v1/page/${slug}/`;
 
-export default {
+spaServer({
   routes: [
     {
       path: '/',
@@ -28,6 +29,7 @@ export default {
         let metas = {};
         let statusCode = 200;
         try {
+          // @ts-ignore
           const resp = await fetch(dayUrl(request.params.id));
           if (!resp.ok) {
             throw new Error('Fetch failed');
@@ -54,6 +56,7 @@ export default {
       response: async request => {
         let metas = {};
         let statusCode = 200;
+        // @ts-ignore
         if (request.params.page === 'email-notification') {
           return {
             metas: {
@@ -64,6 +67,7 @@ export default {
         }
 
         try {
+          // @ts-ignore
           const resp = await fetch(pageUrl(request.params.slug));
           if (!resp.ok) {
             throw new Error('Fetch failed');
@@ -86,8 +90,8 @@ export default {
       },
     },
   ],
-  port: process.env.PORT || 1224,
+  port: parseInt(process.env.PORT) || 1224,
   indexFile: 'index-serve.html',
   serveDir: 'dist/',
   logLevel: 'ERROR',
-};
+});
