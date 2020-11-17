@@ -10,6 +10,7 @@ const dayUrl = day =>
   `${apiBase}wp-json/advent-calendar/v1/days/${day}/${
     apiKey ? `?apiKey=${apiKey}` : ''
   }`;
+
 const pageUrl = slug => `${apiBase}wp-json/advent-calendar/v1/page/${slug}/`;
 
 spaServer({
