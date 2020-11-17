@@ -14,7 +14,8 @@
     "build": "webpack -d --watch",
     "build:prod": "webpack -p",
     "serve": "webpack-dev-server --open",
-    "serve:prod": "ts-node ./server.ts"
+    "serve:prod": "ts-node ./server.ts",
+    "start": "npm run prod"
   },
   "dependencies": {
     "@nico-martin/spa-server": "^0.2.0",
