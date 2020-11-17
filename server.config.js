@@ -86,7 +86,7 @@ export default {
       },
     },
   ],
-  port: 1224,
+  port: process.env.PORT || 1224,
   indexFile: 'index-serve.html',
   serveDir: 'dist/',
   logLevel: 'ERROR',
