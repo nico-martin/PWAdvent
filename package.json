@@ -9,13 +9,12 @@
   "author": "Nico Martin",
   "license": "MIT",
   "scripts": {
-    "dev": "npm run serve & npm run build",
-    "prod": "npm run build:prod && npm run serve:prod",
-    "build": "webpack -d --watch",
+    "dev": "npm run serve:dev & npm run build:dev",
+    "build": "npm run build:prod && npm run serve:prod",
+    "build:dev": "webpack -d --watch",
     "build:prod": "webpack -p",
-    "serve": "webpack-dev-server --open",
-    "serve:prod": "ts-node ./server.ts",
-    "start": "npm run prod"
+    "serve:dev": "webpack-dev-server --open",
+    "serve:prod": "ts-node ./server.ts"
   },
   "dependencies": {
     "@nico-martin/spa-server": "^0.2.0",
