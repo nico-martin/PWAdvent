@@ -41,7 +41,7 @@ module.exports = (env, argv) => {
     devServer: {
       contentBase: dirDist,
       compress: true,
-      port: process.env.PORT || 8080,
+      port: process.env.PORT_DEV || 8080,
       https: serveHttps,
       hot: true,
       historyApiFallback: true,

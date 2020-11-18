@@ -6,11 +6,22 @@ import './AboutControls.css';
 import EmailSignup from '@app/About/EmailSignup';
 import { DATE_TODAY, DATE_START } from '@utils/calendar';
 import { appDescription, appTitle } from '@utils/constants';
+import { settingsDB } from '@store/idb';
 
 const AboutControls = ({ className = '' }: { className?: string }) => {
-  const [emailBox, setEmailBox] = React.useState<boolean>(
-    DATE_TODAY.isBefore(DATE_START) && window.location.pathname === '/'
-  );
+  const [emailBox, setEmailBox] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    settingsDB.get('emailPopupClosed').then(closed => {
+      if (
+        DATE_TODAY.isBefore(DATE_START) &&
+        window.location.pathname === '/' &&
+        !closed
+      ) {
+        setEmailBox(true);
+      }
+    });
+  }, []);
 
   return (
     <React.Fragment>
@@ -33,10 +44,7 @@ const AboutControls = ({ className = '' }: { className?: string }) => {
               className="about-controls__button"
               onClick={() =>
                 navigator.share({
-                  url: window.location.href.replace(
-                    window.location.pathname,
-                    ''
-                  ),
+                  url: window.location.href,
                   text: `Check out PWAdvent.dev. ${appDescription}`,
                   title: appTitle,
                 })
@@ -66,7 +74,12 @@ const AboutControls = ({ className = '' }: { className?: string }) => {
         )}
       </ul>
       {emailBox && (
-        <ShadowBox close={() => setEmailBox(false)}>
+        <ShadowBox
+          close={() => {
+            settingsDB.set('emailPopupClosed', true);
+            setEmailBox(false);
+          }}
+        >
           <EmailSignup />
         </ShadowBox>
       )}

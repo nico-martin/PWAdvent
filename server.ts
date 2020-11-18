@@ -12,6 +12,18 @@ const dayUrl = day =>
   }`;
 
 const pageUrl = slug => `${apiBase}wp-json/advent-calendar/v1/page/${slug}/`;
+const imageTwitter =
+  'https://api.pwadvent.dev/wp-content/uploads/2020/11/twitter.jpg';
+const imageOg =
+  'https://api.pwadvent.dev/wp-content/uploads/2020/11/facebook.jpg';
+
+const defaultMetas = {
+  title: `${app.title} 🎅 ${app.description}`,
+  description: app.about,
+  'og:image': imageOg,
+  'twitter:image:src': imageTwitter,
+  'twitter:card': 'summary_large_image',
+};
 
 spaServer({
   routes: [
@@ -19,8 +31,7 @@ spaServer({
       path: '/',
       response: request => ({
         metas: {
-          title: `${app.title} 🎅 ${app.description}`,
-          description: app.about,
+          ...defaultMetas,
         },
       }),
     },
@@ -47,7 +58,10 @@ spaServer({
           };
         }
         return {
-          metas,
+          metas: {
+            ...defaultMetas,
+            ...metas,
+          },
           statusCode,
         };
       },
@@ -85,7 +99,10 @@ spaServer({
           };
         }
         return {
-          metas,
+          metas: {
+            ...defaultMetas,
+            ...metas,
+          },
           statusCode,
         };
       },
