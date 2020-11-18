@@ -21,18 +21,39 @@ const defaultMetas = {
   title: `${app.title} 🎅 ${app.description}`,
   description: app.about,
   'og:image': imageOg,
-  'twitter:image:src': imageTwitter,
+  'og:title': `${app.title} 🎅 ${app.description}`,
+  'og:description': app.about,
+  'og:locale': 'en_US',
+  'og:type': 'website',
+  'twitter:title': `${app.title} 🎅 ${app.description}`,
+  'twitter:description': app.about,
+  'twitter:image': imageTwitter,
   'twitter:card': 'summary_large_image',
 };
+
+const getMetas = metas => ({
+  ...defaultMetas,
+  ...metas,
+  ...(!('og:title' in metas) && 'title' in metas
+    ? { 'og:title': metas.title }
+    : {}),
+  ...(!('og:description' in metas) && 'description' in metas
+    ? { 'og:description': metas.description }
+    : {}),
+  ...(!('twitter:title' in metas) && 'title' in metas
+    ? { 'twitter:title': metas.title }
+    : {}),
+  ...(!('twitter:description' in metas) && 'description' in metas
+    ? { 'twitter:description': metas.description }
+    : {}),
+});
 
 spaServer({
   routes: [
     {
       path: '/',
       response: request => ({
-        metas: {
-          ...defaultMetas,
-        },
+        metas: defaultMetas,
       }),
     },
     {
@@ -58,10 +79,7 @@ spaServer({
           };
         }
         return {
-          metas: {
-            ...defaultMetas,
-            ...metas,
-          },
+          metas: getMetas(metas),
           statusCode,
         };
       },
@@ -99,10 +117,7 @@ spaServer({
           };
         }
         return {
-          metas: {
-            ...defaultMetas,
-            ...metas,
-          },
+          metas: getMetas(metas),
           statusCode,
         };
       },
