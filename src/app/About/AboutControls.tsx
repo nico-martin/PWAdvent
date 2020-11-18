@@ -5,6 +5,7 @@ import { Button, ShadowBox } from '@theme';
 import './AboutControls.css';
 import EmailSignup from '@app/About/EmailSignup';
 import { DATE_TODAY, DATE_START } from '@utils/calendar';
+import { appDescription, appTitle } from '@utils/constants';
 
 const AboutControls = ({ className = '' }: { className?: string }) => {
   const [emailBox, setEmailBox] = React.useState<boolean>(
@@ -36,8 +37,8 @@ const AboutControls = ({ className = '' }: { className?: string }) => {
                     window.location.pathname,
                     ''
                   ),
-                  text: '24 awesome browser features, one each day',
-                  title: 'PWAdvent',
+                  text: `Check out PWAdvent.dev. ${appDescription}`,
+                  title: appTitle,
                 })
               }
               layout="empty"
