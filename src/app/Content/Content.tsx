@@ -11,7 +11,6 @@ import { Day } from '@app/types';
 
 import ContentCalendar from './ContentCalendar';
 import ContentPage from './ContentPage';
-import { appDescription, appTitle } from '@utils/constants';
 import { metaTitle } from '@utils/metas';
 
 const Content = ({ className = '' }: { className?: string }) => {
@@ -52,7 +51,7 @@ const Content = ({ className = '' }: { className?: string }) => {
         className={className}
         onClose={() => push('/')}
         title="Email Notification"
-        size="small"
+        full={false}
       >
         {slug === 'success' ? (
           <p>
