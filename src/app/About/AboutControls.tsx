@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, ShadowBox } from '@theme';
+import { Button, PortalBox } from '@theme';
 
 import './AboutControls.css';
 import EmailSignup from '@app/About/EmailSignup';
@@ -74,14 +74,16 @@ const AboutControls = ({ className = '' }: { className?: string }) => {
         )}
       </ul>
       {emailBox && (
-        <ShadowBox
+        <PortalBox
+          size="small"
           close={() => {
             settingsDB.set('emailPopupClosed', true);
             setEmailBox(false);
           }}
+          title="Email signup"
         >
           <EmailSignup />
-        </ShadowBox>
+        </PortalBox>
       )}
     </React.Fragment>
   );

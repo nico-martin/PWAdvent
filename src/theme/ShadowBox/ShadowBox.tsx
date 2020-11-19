@@ -1,19 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './ShadowBox.css';
 import { CloseButton } from '../index';
-
-const Portal = ({ children }: { children?: React.JSX.Element }) =>
-  ReactDOM.createPortal(children, document.querySelector('#shadowbox'));
+import cn from '@utils/classnames';
 
 export default ({
+  title,
   children,
   close,
+  size = 'large',
+  className = '',
 }: {
+  title?: string;
   children?: React.JSX.Element | React.JSX.Element[] | string;
   close: Function;
+  size?: 'large' | 'small';
+  className?: string;
 }) => {
   const [show, setShow] = React.useState<boolean>(false);
+  const [shadow, setShadow] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     setShow(true);
@@ -30,14 +34,32 @@ export default ({
   };
 
   return (
-    <Portal>
-      <div className="shadowbox" data-visible={show}>
-        <div className="shadowbox__shadow" onClick={onClose} />
-        <div className="shadowbox__box">
+    <div
+      className={cn(className, 'shadowbox', `shadowbox--${size}`)}
+      data-visible={show}
+    >
+      <div className="shadowbox__shadow" onClick={onClose} />
+      <article
+        className="shadowbox__box"
+        onScroll={e => {
+          const scroll = (e.target as HTMLHtmlElement).scrollTop;
+          if (shadow && scroll === 0) {
+            setShadow(false);
+          } else {
+            setShadow(true);
+          }
+        }}
+      >
+        <header
+          className={`shadowbox__header ${
+            shadow ? 'shadowbox__header--shadow' : ''
+          }`}
+        >
+          {title && <h1 className="shadowbox__title">{title}</h1>}{' '}
           <CloseButton className="shadowbox__close" onClick={onClose} />
-          <div className="shadowbox__content">{children}</div>
-        </div>
-      </div>
-    </Portal>
+        </header>
+        <div className="shadowbox__content">{children}</div>
+      </article>
+    </div>
   );
 };

@@ -24,7 +24,7 @@ const CalendarHeader = ({ className = '' }: { className?: string }) => {
         round
         size="small"
       >
-        Menu
+        About
       </Button>
     </header>
   );
