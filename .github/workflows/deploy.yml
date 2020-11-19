@@ -14,4 +14,9 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
-        script: whoami
+        script: |
+          cd ~/../var/docker/apps/pwadvent
+          git pull
+          cd ~/../var/docker
+          docker-compose build
+          docker-compose up -d
