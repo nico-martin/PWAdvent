@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from '@utils/classnames';
 
 import './SVG.css';
 
@@ -24,7 +25,7 @@ const SVG = ({
 
   return (
     <figure
-      className={`${className} svg`}
+      className={cn(className, 'svg')}
       dangerouslySetInnerHTML={{ __html: loadedIcon }}
       {...props}
     />

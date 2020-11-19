@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useStoreState, useActions } from 'unistore-hooks';
@@ -6,8 +6,38 @@ import { actions } from '@store/index';
 import { State } from '@store/types';
 
 import './CalendarDay.css';
+import cn from '@utils/classnames';
 import { DATE_TODAY } from '@utils/calendar';
 import dayjs from '@utils/dayjs';
+import { SVG } from '@theme';
+import { zeroPad } from '@utils/helpers';
+
+const days = {
+  1: 16,
+  2: 2,
+  3: 3,
+  4: 8,
+  5: 5,
+  6: 6,
+  7: 4,
+  8: 9,
+  9: 7,
+  10: 10,
+  11: 11,
+  12: 15,
+  13: 13,
+  14: 18,
+  15: 12,
+  16: 1,
+  17: 20,
+  18: 19,
+  19: 14,
+  20: 21,
+  21: 8,
+  22: 17,
+  23: 23,
+  24: 24,
+};
 
 const CalendarDay = ({
   day,
@@ -30,6 +60,11 @@ const CalendarDay = ({
     loadDay(day);
   }, [day]);
 
+  const svgDay = React.useMemo(() => {
+    console.log(day, days[day]);
+    return days[day];
+  }, [day, days]);
+
   const Wrapper = ({
     children,
     ...props
@@ -51,6 +86,10 @@ const CalendarDay = ({
         isActive ? 'calendar-day--active' : ''
       }`}
     >
+      <SVG
+        className={cn('calendar-day__snow', `calendar-day__snow--${svgDay}`)}
+        path={`snowwall-${zeroPad(svgDay, 2)}.svg`}
+      />
       <div className="calendar-day__inner">{day}</div>
     </Wrapper>
   );

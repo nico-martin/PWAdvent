@@ -17,3 +17,6 @@ export const untrailingSlashIt = (str: string): string =>
 
 export const trailingSlashIt = (str: string): string =>
   untrailingSlashIt(str) + '/';
+
+export const shuffle = (items: Array<any>) =>
+  items.sort(() => Math.random() - 0.5);
