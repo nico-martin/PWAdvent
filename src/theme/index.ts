@@ -9,6 +9,7 @@ export { default as Logo } from './Logo/Logo';
 export { default as Loader } from './Loader/Loader';
 export { default as ContentModal } from './ContentModal/ContentModal';
 export { default as Notification } from './Misc/Notification';
+export { default as Snow } from './Misc/Snow';
 
 // Form
 

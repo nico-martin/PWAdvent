@@ -31,6 +31,16 @@
     height: calc(100% - var(--space));
     flex-grow: 1;
   }
+
+  &__snow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 5000;
+  }
 }
 
 [data-layout='mobile'] {
