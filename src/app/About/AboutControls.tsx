@@ -12,6 +12,8 @@ const AboutControls = ({ className = '' }: { className?: string }) => {
   const [emailBox, setEmailBox] = React.useState<boolean>(false);
 
   React.useEffect(() => {
+    return;
+    // todo: need to find a better way
     settingsDB.get('emailPopupClosed').then(closed => {
       if (
         DATE_TODAY.isBefore(DATE_START) &&
@@ -77,7 +79,7 @@ const AboutControls = ({ className = '' }: { className?: string }) => {
         <PortalBox
           size="small"
           close={() => {
-            settingsDB.set('emailPopupClosed', true);
+            //settingsDB.set('emailPopupClosed', true);
             setEmailBox(false);
           }}
           title="Email signup"
