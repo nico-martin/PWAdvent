@@ -13,6 +13,7 @@ import Calendar from '@app/Calendar/Calendar';
 import Content from '@app/Content/Content';
 import { State } from '@store/types';
 import useWindowSize from '@app/hooks/useWindowSize';
+import { Snow } from '@theme';
 
 let startX = 0;
 let currentX = 0;
@@ -89,6 +90,7 @@ const App = () => {
           <Calendar className="app__content" />
         </div>
       </div>
+      <Snow className="app__snow" />
     </React.Fragment>
   );
 };
