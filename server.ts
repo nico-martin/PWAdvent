@@ -13,9 +13,9 @@ const dayUrl = day =>
 
 const pageUrl = slug => `${apiBase}wp-json/advent-calendar/v1/page/${slug}/`;
 const imageTwitter =
-  'https://api.pwadvent.dev/wp-content/uploads/2020/11/twitter.jpg';
+  'https://api.pwadvent.dev/wp-content/uploads/2020/11/twitter-1.jpg';
 const imageOg =
-  'https://api.pwadvent.dev/wp-content/uploads/2020/11/facebook.jpg';
+  'https://api.pwadvent.dev/wp-content/uploads/2020/11/facebook-1.jpg';
 
 const defaultMetas = {
   title: `${app.title} 🎅 ${app.description}`,
