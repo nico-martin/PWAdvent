@@ -6,7 +6,7 @@ import './App';
 import { isDev, windowResize } from '@utils/helpers';
 
 windowResize();
-window.setTimeout(() => windowResize(), 1000);
+//window.setTimeout(() => windowResize(), 1000);
 window.addEventListener('resize', () => windowResize());
 
 if (!isDev) {
