@@ -18,5 +18,19 @@ export const untrailingSlashIt = (str: string): string =>
 export const trailingSlashIt = (str: string): string =>
   untrailingSlashIt(str) + '/';
 
-export const shuffle = (items: Array<any>) =>
-  items.sort(() => Math.random() - 0.5);
+export const shuffle = (items: Array<any>) => {
+  const recur = (arr, currentIndex) => {
+    if (currentIndex === 0) {
+      return arr;
+    }
+    const randomIndex = Math.floor(Math.random() * currentIndex);
+    const swap = arr[currentIndex];
+    arr[currentIndex] = arr[randomIndex];
+    arr[randomIndex] = swap;
+    return recur(arr, currentIndex - 1);
+  };
+  return recur(
+    items.map(x => x),
+    items.length - 1
+  );
+};

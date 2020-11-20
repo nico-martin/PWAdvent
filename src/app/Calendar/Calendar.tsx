@@ -9,16 +9,14 @@ import useWindowSize from '@app/hooks/useWindowSize';
 import CalendarHeader from '@app/Calendar/CalendarHeader';
 
 import './Calendar.css';
+import { daysOrder } from '@utils/constants';
 
 const Calendar = ({ className = '' }: { className?: string }) => {
   const window = useWindowSize();
   const calendarRef = React.useRef(null);
   const [height, setHeight] = React.useState<number>(null);
   const { setMenuOpen } = useActions(actions);
-  const { days: storeDays, menuOpen } = useStoreState<State>([
-    'days',
-    'menuOpen',
-  ]);
+  const { menuOpen } = useStoreState<State>(['menuOpen']);
 
   React.useEffect(() => {
     if (calendarRef.current && window.width) {
@@ -43,9 +41,9 @@ const Calendar = ({ className = '' }: { className?: string }) => {
       )}
       <CalendarHeader className="calendar__header" />
       <div className="calendar__calendar" style={{ height }} ref={calendarRef}>
-        {Object.keys(storeDays).map(day => (
+        {daysOrder.map(day => (
           <div
-            style={{ gridArea: `cal${zeroPad(parseInt(day), 2)}` }}
+            //style={{ gridArea: `cal${zeroPad(parseInt(day), 2)}` }}
             className={`calendar__item calendar__item--${day}`}
           >
             <CalendarDay day={parseInt(day)} />
