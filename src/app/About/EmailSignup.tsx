@@ -87,7 +87,7 @@ const EmailSignup = ({ className = '' }: { className?: string }) => {
                 label="Email"
                 component={InputText}
                 disabled={loading}
-                subtype="email"
+                type="email"
                 register={{
                   required: 'This value is required',
                   pattern: {
