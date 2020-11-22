@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, PortalBox } from '@theme';
+import { Button, PortalBox, SVG } from '@theme';
 
 import './AboutControls.css';
 import EmailSignup from '@app/About/EmailSignup';

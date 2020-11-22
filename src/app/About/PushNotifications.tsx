@@ -16,7 +16,7 @@ const PushNotifications = ({ className = '' }: { className?: string }) => {
   const [isSubscribed, setIsSubscribed] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
 
-  const idIos = React.useMemo(
+  const isIos = React.useMemo(
     () =>
       [
         'iPad Simulator',
@@ -29,6 +29,7 @@ const PushNotifications = ({ className = '' }: { className?: string }) => {
       (navigator.userAgent.includes('Mac') && 'ontouchend' in document),
     []
   );
+  const supportsPush = 'PushManager' in window && 'serviceWorker' in navigator;
 
   React.useEffect(() => {
     (async function effect() {
@@ -101,16 +102,39 @@ const PushNotifications = ({ className = '' }: { className?: string }) => {
           <Notification type="error">
             <p>Someting went wrong</p>
           </Notification>
-        ) : !('PushManager' in window) || !('serviceWorker' in navigator) ? (
+        ) : !supportsPush ? (
           <React.Fragment>
-            <Notification type="message">
-              <p>Your browser does not support push notifications.</p>
+            <Notification type="error">
+              <p>Your browser does not support web push notifications.</p>
             </Notification>
-            {idIos && <p>iOS</p>}
+            {isIos && (
+              <p>
+                <br />
+                Unfortunately, <b>Apple</b> tries to hold back the further
+                development of rich web applications by{' '}
+                <b>not implementing features like web push into iOS.</b>
+                <br />
+                It is now up to us to build pressure by{' '}
+                <a
+                  href="https://bugs.webkit.org/show_bug.cgi?id=182566"
+                  target="_blank"
+                >
+                  describing our usecase
+                </a>{' '}
+                and/or{' '}
+                <a
+                  href="https://www.change.org/p/tim-cook-apple-inc-implement-web-push-notifications-on-ios-devices?utm_content=cl_sharecopy_18178670_fr-FR%3Av1&recruiter=1092330168&recruited_by_id=76293570-9ba6-11ea-bd01-e5d39501339a&utm_source=share_petition&utm_medium=copylink&utm_campaign=psf_combo_share_initial&utm_term=share_petition"
+                  target="_blank"
+                >
+                  making ourselves heard
+                </a>
+                .
+              </p>
+            )}
           </React.Fragment>
         ) : !isSubscribed ? (
           <Button
-            icon="mdi/bell-outline"
+            icon="mdi/bell"
             onClick={() => subscribe()}
             color="red"
             loading={loading}
@@ -126,13 +150,13 @@ const PushNotifications = ({ className = '' }: { className?: string }) => {
               </b>
             </p>
             <Button
-              layout="empty"
+              layout="ghost"
+              size="small"
               icon="mdi/bell-outline"
               round
               onClick={() => unsubscribe()}
               loading={loading}
               fontWeight="normal"
-              zeroPadding
             >
               Unsubscribe
             </Button>
