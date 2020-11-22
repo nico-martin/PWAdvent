@@ -17,6 +17,9 @@ const Button = ({
   size = 'medium',
   loading = false,
   disabled = false,
+  color = 'black',
+  zeroPadding = false,
+  fontWeight = 'bold',
   ...props
 }: {
   children?: React.JSX.Element | React.JSX.Element[] | string;
@@ -30,6 +33,9 @@ const Button = ({
   size?: 'medium' | 'small' | 'large';
   loading?: boolean;
   disabled?: boolean;
+  color?: 'black' | 'red';
+  zeroPadding?: boolean;
+  fontWeight?: 'normal' | 'bold';
   [key: string]: any;
 }) => {
   return (
@@ -41,10 +47,13 @@ const Button = ({
         'button',
         `button--type-${layout}`,
         `button--size-${size}`,
+        `button--color-${color}`,
+        `button--fontWeight-${fontWeight}`,
         {
           'button--round': round,
           'button--loading': loading,
           'button--disabled': disabled,
+          'button--zeropadding': zeroPadding,
         }
       )}
       onClick={() => onClick()}

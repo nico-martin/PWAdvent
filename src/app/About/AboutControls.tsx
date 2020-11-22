@@ -4,12 +4,14 @@ import { Button, PortalBox } from '@theme';
 
 import './AboutControls.css';
 import EmailSignup from '@app/About/EmailSignup';
+import PushNotifications from '@app/About/PushNotifications';
 import { DATE_TODAY, DATE_START } from '@utils/calendar';
 import { appDescription, appTitle } from '@utils/constants';
 import { settingsDB } from '@store/idb';
 
 const AboutControls = ({ className = '' }: { className?: string }) => {
   const [emailBox, setEmailBox] = React.useState<boolean>(false);
+  const [pushBox, setPushBox] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     return;
@@ -38,6 +40,18 @@ const AboutControls = ({ className = '' }: { className?: string }) => {
             iconRight
           >
             Subscribe Email
+          </Button>
+        </li>
+        <li className="about-controls__item">
+          <Button
+            className="about-controls__button"
+            onClick={() => setPushBox(true)}
+            layout="empty"
+            round
+            icon="mdi/bell-outline"
+            iconRight
+          >
+            Push Notifications
           </Button>
         </li>
         {'share' in navigator && (
@@ -85,6 +99,15 @@ const AboutControls = ({ className = '' }: { className?: string }) => {
           title="Email signup"
         >
           <EmailSignup />
+        </PortalBox>
+      )}
+      {pushBox && (
+        <PortalBox
+          size="small"
+          close={() => setPushBox(false)}
+          title="Push Notifications"
+        >
+          <PushNotifications />
         </PortalBox>
       )}
     </React.Fragment>

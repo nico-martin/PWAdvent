@@ -1,7 +1,17 @@
 .button {
   cursor: pointer;
   font-weight: 700;
+
+  &--fontWeight-normal {
+    font-weight: normal;
+  }
+
   padding: 0.5em 1em;
+
+  &--zeropadding {
+    padding: 0 0;
+  }
+
   position: relative;
   color: var(--c-p);
   background-color: currentColor;
@@ -68,7 +78,7 @@
   transition: all 200ms ease-in-out;
 
   &:hover {
-    //background-color: var(--c-hellgrau);
+  //background-color: var(--c-hellgrau);
   }
 
   &:focus {
@@ -109,5 +119,9 @@
         opacity: 0;
       }
     }
+  }
+
+  &--color-red {
+    color: var(--c-primary);
   }
 }

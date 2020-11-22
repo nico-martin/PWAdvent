@@ -3,13 +3,14 @@ import './styles/prism.css';
 import './styles/gutenberg-content.css';
 import './App';
 
-import { isDev, windowResize } from '@utils/helpers';
+import { windowResize } from '@utils/helpers';
+import { registerSw } from '@utils/constants';
 
 windowResize();
-//window.setTimeout(() => windowResize(), 1000);
+window.setTimeout(() => windowResize(), 1000);
 window.addEventListener('resize', () => windowResize());
 
-if (!isDev) {
+if (registerSw) {
   'serviceWorker' in navigator &&
     navigator.serviceWorker.register('service-worker.js');
 
