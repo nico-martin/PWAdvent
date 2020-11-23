@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useStoreState } from 'unistore-hooks';
+import { useStoreState, useActions } from 'unistore-hooks';
 
 import cn from '@utils/classnames';
 
@@ -10,11 +10,13 @@ import { urlB64ToUint8Array } from '@utils/helpers';
 
 import './PushNotifications.css';
 import { apiBase } from '@utils/constants';
+import { actions } from '@store/index';
 
 const PushNotifications = ({ className = '' }: { className?: string }) => {
   const { vapidKey } = useStoreState<State>(['vapidKey']);
   const [isSubscribed, setIsSubscribed] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
+  const { loadVapidKey } = useActions(actions);
 
   const isIos = React.useMemo(
     () =>
@@ -30,6 +32,10 @@ const PushNotifications = ({ className = '' }: { className?: string }) => {
     []
   );
   const supportsPush = 'PushManager' in window && 'serviceWorker' in navigator;
+
+  React.useEffect(() => {
+    loadVapidKey();
+  }, []);
 
   React.useEffect(() => {
     (async function effect() {
@@ -100,7 +106,7 @@ const PushNotifications = ({ className = '' }: { className?: string }) => {
           <Loader className="push-notifications__loader" />
         ) : vapidKey.key === '' ? (
           <Notification type="error">
-            <p>Someting went wrong</p>
+            <p>Something went wrong</p>
           </Notification>
         ) : !supportsPush ? (
           <React.Fragment>
