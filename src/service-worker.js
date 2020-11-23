@@ -25,7 +25,7 @@ self.addEventListener('push', event => {
   const payload = JSON.parse(event.data.text());
   self.registration.showNotification(payload.title, {
     body: payload.body, // content of the push notification
-    badge: './assets/static/notification-badge.png',
+    badge: './assets/static/notification-snowflake.png',
     icon: './assets/static/notification-badge.png',
     data: {
       ...payload,
