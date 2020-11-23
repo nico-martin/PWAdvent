@@ -12,6 +12,7 @@ import './PushNotifications.css';
 import { apiBase } from '@utils/constants';
 
 const PushNotifications = ({ className = '' }: { className?: string }) => {
+  const [error, setError] = React.useState<string>('');
   const [isSubscribed, setIsSubscribed] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
 
@@ -32,6 +33,13 @@ const PushNotifications = ({ className = '' }: { className?: string }) => {
 
   React.useEffect(() => {
     (async function effect() {
+      if (window.Notification.permission === 'denied') {
+        setError(
+          'It looks like you already explicitly denied permission for pwadvent.dev to display system notifications. Please change this option in the site settings and reload this page.'
+        );
+        return;
+      }
+
       const reg = await navigator.serviceWorker.getRegistration();
       const subscription = await reg.pushManager.getSubscription();
       if (subscription) {
@@ -112,7 +120,11 @@ const PushNotifications = ({ className = '' }: { className?: string }) => {
         the new window opens.
       </p>
       <div className="push-notifications__feedback">
-        {!supportsPush ? (
+        {error !== '' ? (
+          <Notification type="error">
+            <p>{error}</p>
+          </Notification>
+        ) : !supportsPush ? (
           <React.Fragment>
             <Notification type="error">
               <p>Your browser does not support web push notifications.</p>
