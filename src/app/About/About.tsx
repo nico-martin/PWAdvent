@@ -1,7 +1,7 @@
 import React from 'react';
 import { useActions } from 'unistore-hooks';
 
-import { Button, Logo, ShadowBox } from '@theme';
+import { Button, Logo } from '@theme';
 import AboutControls from '@app/About/AboutControls';
 
 import './About.css';
@@ -15,7 +15,12 @@ const About = ({
   className?: string;
   [key: string]: any;
 }) => {
-  const { setMenuOpen } = useActions(actions);
+  const { setMenuOpen, loadVapidKey } = useActions(actions);
+
+  React.useEffect(() => {
+    loadVapidKey();
+  }, []);
+
   return (
     <article className={`${className} about`} {...props}>
       <header className="about__header">

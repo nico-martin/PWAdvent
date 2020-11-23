@@ -6,10 +6,12 @@ import './SVG.css';
 const SVG = ({
   path,
   className = '',
+  inline = false,
   ...props
 }: {
   path: string;
   className?: string;
+  inline?: boolean;
   [key: string]: any;
 }) => {
   const [loadedIcon, setLoadedIcon] = React.useState('');
@@ -25,7 +27,9 @@ const SVG = ({
 
   return (
     <figure
-      className={cn(className, 'svg')}
+      className={cn(className, 'svg', {
+        'svg--inline': inline,
+      })}
       dangerouslySetInnerHTML={{ __html: loadedIcon }}
       {...props}
     />
