@@ -1,7 +1,9 @@
 .svg {
-  width: 1em;
-  height: 1em;
-  display: inline-block;
+  &--inline {
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+  }
 
   svg {
     width: 100%;

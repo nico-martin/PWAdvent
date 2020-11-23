@@ -144,10 +144,8 @@ const PushNotifications = ({ className = '' }: { className?: string }) => {
         ) : (
           <React.Fragment>
             <p className="push-notifications__checked">
-              <b>
-                <SVG path="icon/mdi/check.svg" /> Push notifications are
-                activated
-              </b>
+              <SVG path="icon/mdi/check.svg" inline />{' '}
+              <b>Push notifications are activated</b>
             </p>
             <Button
               layout="ghost"
