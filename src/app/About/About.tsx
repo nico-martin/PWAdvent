@@ -15,11 +15,7 @@ const About = ({
   className?: string;
   [key: string]: any;
 }) => {
-  const { setMenuOpen, loadVapidKey } = useActions(actions);
-
-  React.useEffect(() => {
-    loadVapidKey();
-  }, []);
+  const { setMenuOpen } = useActions(actions);
 
   return (
     <article className={`${className} about`} {...props}>

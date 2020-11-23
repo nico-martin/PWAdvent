@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useStoreState, useActions } from 'unistore-hooks';
+import { useStoreState } from 'unistore-hooks';
 
 import cn from '@utils/classnames';
 
@@ -10,13 +10,10 @@ import { urlB64ToUint8Array } from '@utils/helpers';
 
 import './PushNotifications.css';
 import { apiBase } from '@utils/constants';
-import { actions } from '@store/index';
 
 const PushNotifications = ({ className = '' }: { className?: string }) => {
-  const { vapidKey } = useStoreState<State>(['vapidKey']);
   const [isSubscribed, setIsSubscribed] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
-  const { loadVapidKey } = useActions(actions);
 
   const isIos = React.useMemo(
     () =>
@@ -34,10 +31,6 @@ const PushNotifications = ({ className = '' }: { className?: string }) => {
   const supportsPush = 'PushManager' in window && 'serviceWorker' in navigator;
 
   React.useEffect(() => {
-    loadVapidKey();
-  }, []);
-
-  React.useEffect(() => {
     (async function effect() {
       const reg = await navigator.serviceWorker.getRegistration();
       const subscription = await reg.pushManager.getSubscription();
@@ -48,12 +41,29 @@ const PushNotifications = ({ className = '' }: { className?: string }) => {
     })();
   }, []);
 
+  const getVapidKey = async () => {
+    let key = '';
+    const resp = await fetch(
+      `${apiBase}wp-json/advent-calendar/v1/web-push/public-key`
+    );
+
+    if (resp.ok) {
+      const respJson = await resp.json();
+      key = respJson.publicKey;
+    }
+    return key;
+  };
+
   const subscribe = async () => {
     setLoading(true);
     const reg = await navigator.serviceWorker.getRegistration();
+    const vapidKey = await getVapidKey();
+    if (vapidKey === '') {
+      alert('something went wrong. Could not connect to the push server');
+    }
     const subscription = await reg.pushManager.subscribe({
       userVisibleOnly: true,
-      applicationServerKey: new Uint8Array(urlB64ToUint8Array(vapidKey.key)),
+      applicationServerKey: new Uint8Array(urlB64ToUint8Array(vapidKey)),
     });
     await sendSubscription(subscription.toJSON());
     setLoading(false);
@@ -102,13 +112,7 @@ const PushNotifications = ({ className = '' }: { className?: string }) => {
         the new window opens.
       </p>
       <div className="push-notifications__feedback">
-        {vapidKey.loading ? (
-          <Loader className="push-notifications__loader" />
-        ) : vapidKey.key === '' ? (
-          <Notification type="error">
-            <p>Something went wrong</p>
-          </Notification>
-        ) : !supportsPush ? (
+        {!supportsPush ? (
           <React.Fragment>
             <Notification type="error">
               <p>Your browser does not support web push notifications.</p>
@@ -139,14 +143,22 @@ const PushNotifications = ({ className = '' }: { className?: string }) => {
             )}
           </React.Fragment>
         ) : !isSubscribed ? (
-          <Button
-            icon="mdi/bell"
-            onClick={() => subscribe()}
-            color="red"
-            loading={loading}
-          >
-            Subscribe
-          </Button>
+          <React.Fragment>
+            <Button
+              icon="mdi/bell"
+              onClick={() => subscribe()}
+              color="red"
+              loading={loading}
+            >
+              Subscribe
+            </Button>
+            <br />
+            <p className="fs--xsmall">
+              From the first to the 24th of december 2020 we will send you a
+              link to the latest article every morning. You are able to
+              unsubscribe at any time here
+            </p>
+          </React.Fragment>
         ) : (
           <React.Fragment>
             <p className="push-notifications__checked">

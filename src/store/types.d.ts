@@ -4,10 +4,6 @@ export interface State {
   offline: boolean;
   menuOpen: boolean;
   days: Record<number, Day>;
-  vapidKey: {
-    loading: boolean;
-    key: string;
-  };
   page: Page;
 }
 

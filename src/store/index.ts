@@ -28,10 +28,6 @@ const initialState: State = {
   offline: false,
   menuOpen: DATE_TODAY.isBefore(DATE_START),
   days: initialDays,
-  vapidKey: {
-    loading: false,
-    key: '',
-  },
   page: {
     loading: false,
     slug: '',
@@ -80,31 +76,6 @@ const setPage = (
 
 export const actions = (store: Store<State>) => ({
   setOffline: (state, offline: boolean) => store.setState({ offline }),
-  loadVapidKey: async state => {
-    store.setState({
-      vapidKey: {
-        ...state.vapidKey,
-        loading: true,
-      },
-    });
-
-    const resp = await fetch(
-      `${apiBase}wp-json/advent-calendar/v1/web-push/public-key`
-    );
-
-    let key = '';
-    if (resp.ok) {
-      const respJson = await resp.json();
-      key = respJson.publicKey;
-    }
-
-    store.setState({
-      vapidKey: {
-        loading: false,
-        key,
-      },
-    });
-  },
   loadDay: async ({ days }, day: number) => {
     const storeDay = days[day];
 

@@ -48,3 +48,11 @@ button {
 a {
   color: var(--c-primary);
 }
+
+.fs--small {
+  font-size: var(--fs-small);
+}
+
+.fs--xsmall {
+  font-size: var(--fs-xsmall);
+}
