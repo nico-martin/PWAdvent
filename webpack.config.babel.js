@@ -115,6 +115,7 @@ module.exports = (env, argv) => {
         : []),
       new DefinePlugin({
         IS_DEV: JSON.stringify(dev),
+        REGISTER_SW: !dev || process.env.GENERATE_SW === 'true',
         TODAY: JSON.stringify(process.env.TODAY) || null,
         API_BASE: JSON.stringify(
           process.env.API_BASE || 'https://api.pwadvent.dev/'

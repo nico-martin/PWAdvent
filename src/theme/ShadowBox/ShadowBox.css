@@ -64,6 +64,11 @@
     }
   }
 
+  &__title {
+    display: flex;
+    vertical-align: center;
+  }
+
   &__close {
     font-size: 1.5rem;
   }
