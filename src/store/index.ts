@@ -135,6 +135,7 @@ export const actions = (store: Store<State>) => ({
       content: respJson.content,
       author: respJson.author,
       image: respJson.image,
+      source: respJson.source,
     };
     //}
 

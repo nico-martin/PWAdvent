@@ -28,12 +28,14 @@ interface Author {
 }
 
 export interface DayData {
+  day: number;
   date: string;
   title: string;
   excerpt?: string;
   content: string;
   author?: Author;
   image?: ApiImage;
+  source?: string;
 }
 
 export interface Day {

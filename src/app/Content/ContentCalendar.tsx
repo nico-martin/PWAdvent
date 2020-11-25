@@ -5,7 +5,7 @@ import './ContentCalendar.css';
 
 import Prism from '@utils/prism';
 import ContentAuthor from '@app/Content/ContentAuthor';
-import { Button, LazyImage } from '@theme';
+import { Button, LazyImage, Notification } from '@theme';
 import dayjs from '@utils/dayjs';
 
 const ContentCalendar = ({
@@ -20,15 +20,24 @@ const ContentCalendar = ({
   const contentRef = React.useRef(null);
   const date = React.useMemo(() => dayjs(day.date), [day.date]);
 
-  React.useEffect(() => {
-    Prism.highlightAll();
-  }, [contentRef, day.content]);
+  const originalSource = React.useMemo(
+    () => (day.source ? new URL(day.source) : null),
+    [day.source]
+  );
 
   return (
     <div className={`content-calendar ${className}`}>
       <p className="content-calendar__date">
         <b>Day {number}:</b> {date && date.format('L')}
       </p>
+      {originalSource && (
+        <Notification className="content-calendar__cannonical">
+          This article was originally published on{' '}
+          <a href={originalSource.href} target="_blank">
+            {originalSource.host}
+          </a>
+        </Notification>
+      )}
       {day.excerpt && (
         <p className="content-calendar__excerpt">{day.excerpt}</p>
       )}
