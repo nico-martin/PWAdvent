@@ -10,7 +10,7 @@
     display: block;
   }
 
-  &__date {
+  &__date, &__cannonical {
     margin-bottom: var(--space);
   }
 
