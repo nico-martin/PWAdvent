@@ -72,6 +72,15 @@ spaServer({
             title: `${respJson.title} 🎅 ${app.title}`,
             description: respJson.excerpt,
           };
+          if (respJson.source) {
+            metas['canonical'] = {
+              tag: 'link',
+              attributes: {
+                rel: 'canonical',
+                href: respJson.source,
+              },
+            };
+          }
         } catch (error) {
           statusCode = 404;
           metas = {
