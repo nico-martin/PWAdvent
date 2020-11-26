@@ -12,9 +12,11 @@ const linkList = {
 const ContentAuthor = ({
   author,
   className = '',
+  small = false,
 }: {
   author: Author;
   className?: string;
+  small?: boolean;
 }) => {
   const links: Array<{
     title: string;
@@ -41,8 +43,8 @@ const ContentAuthor = ({
           className="content-author__image"
           alt={author.name}
           src={author.image.src}
-          width={author.image.width}
-          height={author.image.width}
+          width={small ? 50 : author.image.width}
+          height={small ? 50 : author.image.width}
         />
       )}
       <div className="content-author__about">

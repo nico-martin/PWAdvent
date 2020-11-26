@@ -8,4 +8,39 @@
       margin-top: var(--space-l);
     }
   }
+
+  .wp-block-image {
+    .aligncenter {
+      text-align: center;
+
+      img {
+        margin: 0 auto;
+      }
+    }
+
+    figcaption {
+      font-style: italic;
+      font-size: var(--fs-small);
+      margin-top: var(--space-s);
+      opacity: 0.75;
+    }
+  }
+
+  code {
+    &:before {
+      content: '';
+      position: absolute;
+      bottom: -0.1em;
+      right: 0.1em;
+      left: 0.1em;
+      top: -0.1em;
+      background-color: #2d2d2d;
+      z-index: -1;
+      border-radius: 4px;
+    }
+
+    position: relative;
+    color: #fff;
+    padding: 0 0.5em;
+  }
 }

@@ -16,7 +16,6 @@ registerRoute(
 
 // The precache routes for workbox-webpack-plugin
 precacheAndRoute(self.__WB_MANIFEST);
-
 const handler = createHandlerBoundToURL('/index-serve.html');
 const navigationRoute = new NavigationRoute(handler);
 registerRoute(navigationRoute);

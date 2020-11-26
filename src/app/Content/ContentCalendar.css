@@ -14,13 +14,19 @@
     margin-bottom: var(--space);
   }
 
-  &__share {
-    margin-top: var(--space-l);
-  }
-
-  &__author,
+  &__meta,
   &__excerpt,
   &__image {
     margin-bottom: var(--space-l);
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__author {
+    margin-right: var(--space);
   }
 }
