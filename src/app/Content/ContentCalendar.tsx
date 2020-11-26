@@ -7,6 +7,7 @@ import Prism from '@utils/prism';
 import ContentAuthor from '@app/Content/ContentAuthor';
 import { Button, LazyImage, Notification } from '@theme';
 import dayjs from '@utils/dayjs';
+import useWindowSize from '@app/hooks/useWindowSize';
 
 const ContentCalendar = ({
   day,
@@ -19,11 +20,16 @@ const ContentCalendar = ({
 }) => {
   const contentRef = React.useRef(null);
   const date = React.useMemo(() => dayjs(day.date), [day.date]);
+  const { width } = useWindowSize();
 
   const originalSource = React.useMemo(
     () => (day.source ? new URL(day.source) : null),
     [day.source]
   );
+
+  React.useEffect(() => {
+    Prism.highlightAll();
+  }, [contentRef, day.content]);
 
   return (
     <div className={`content-calendar ${className}`}>
@@ -45,10 +51,50 @@ const ContentCalendar = ({
         <LazyImage image={day.image} className="content-calendar__image" />
       )}
       {day.author && (
-        <ContentAuthor
-          author={day.author}
-          className="content-calendar__author"
-        />
+        <div className="content-calendar__meta">
+          <ContentAuthor
+            author={day.author}
+            className="content-calendar__author"
+            small={width <= 700}
+          />
+          {'share' in navigator ? (
+            <Button
+              className={`content-share ${className}`}
+              onClick={() =>
+                navigator.share({
+                  url: window.location.href,
+                  text: 'Have a look at the awesome article on PWAdvent.dev',
+                  title: `${day.title} - PWAdvent`,
+                })
+              }
+              layout="empty"
+              round
+              icon="mdi/share"
+              iconRight
+              size={width <= 700 ? 'small' : 'medium'}
+            >
+              Share
+            </Button>
+          ) : (
+            <Button
+              className={`content-share ${className}`}
+              onClick={() =>
+                console.log({
+                  url: window.location.href,
+                  text: 'Have a look at the awesome feature',
+                  title: `${day.title} - PWAdvent`,
+                })
+              }
+              layout="ghost"
+              round
+              icon="mdi/share"
+              iconRight
+              size={width <= 700 ? 'small' : 'medium'}
+            >
+              Share
+            </Button>
+          )}
+        </div>
       )}
       <div
         ref={contentRef}
@@ -57,23 +103,6 @@ const ContentCalendar = ({
           __html: day.content,
         }}
       />
-      {'share' in navigator && (
-        <Button
-          className="content-calendar__share"
-          onClick={() =>
-            navigator.share({
-              url: window.location.href,
-              text: 'Have a look at the awesome feature',
-              title: `${day.title} - PWAdvent`,
-            })
-          }
-          layout="ghost"
-          round
-          icon="mdi/share"
-        >
-          Tell a friend
-        </Button>
-      )}
     </div>
   );
 };
