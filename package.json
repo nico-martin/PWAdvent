@@ -17,7 +17,7 @@
     "serve:prod": "ts-node ./server.ts"
   },
   "dependencies": {
-    "@nico-martin/spa-server": "^0.2.6",
+    "@nico-martin/spa-server": "^0.2.7",
     "axios": "^0.20.0",
     "dayjs": "^1.9.3",
     "idb": "^5.0.7",
