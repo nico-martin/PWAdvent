@@ -18,21 +18,22 @@ const imageTwitter =
 const imageOg =
   'https://api.pwadvent.dev/wp-content/uploads/2020/11/facebook-1.jpg';
 
+const usePropery = (name, content) => ({
+  tag: 'meta',
+  attributes: {
+    property: name,
+    content,
+  },
+});
+
 const defaultMetas = {
   title: `${app.title} 🎅 ${app.description}`,
   description: app.about,
-  facebookImage: {
-    tag: 'meta',
-    attributes: {
-      name: 'image',
-      property: 'og:image',
-      content: imageOg,
-    },
-  },
-  'og:title': `${app.title} 🎅 ${app.description}`,
-  'og:description': app.about,
-  'og:locale': 'en_US',
-  'og:type': 'website',
+  'og:image': usePropery('og:image', imageOg),
+  'og:title': usePropery('og:title', `${app.title} 🎅 ${app.description}`),
+  'og:description': usePropery('og:description', app.about),
+  'og:locale': usePropery('og:locale', 'en_US'),
+  'og:type': usePropery('og:type', 'website'),
   'twitter:title': `${app.title} 🎅 ${app.description}`,
   'twitter:description': app.about,
   'twitter:image': imageTwitter,
@@ -43,10 +44,10 @@ const getMetas = metas => ({
   ...defaultMetas,
   ...metas,
   ...(!('og:title' in metas) && 'title' in metas
-    ? { 'og:title': metas.title }
+    ? { 'og:title': usePropery('og:title', metas.title) }
     : {}),
   ...(!('og:description' in metas) && 'description' in metas
-    ? { 'og:description': metas.description }
+    ? { 'og:description': usePropery('og:description', metas.description) }
     : {}),
   ...(!('twitter:title' in metas) && 'title' in metas
     ? { 'twitter:title': metas.title }
@@ -76,19 +77,16 @@ spaServer({
             throw new Error('Fetch failed');
           }
           const respJson = await resp.json();
+
           metas = {
             title: `${respJson.title} 🎅 ${app.title}`,
             description: respJson.excerpt,
             ...(respJson.previewImages.facebook
               ? {
-                  facebookImage: {
-                    tag: 'meta',
-                    attributes: {
-                      name: 'image',
-                      property: 'og:image',
-                      content: respJson.previewImages.facebook,
-                    },
-                  },
+                  'og:image': usePropery(
+                    'og:image',
+                    respJson.previewImages.facebook
+                  ),
                 }
               : {}),
             ...(respJson.previewImages.twitter
@@ -104,7 +102,6 @@ spaServer({
               },
             };
           }
-          console.log('///// metas', metas);
         } catch (error) {
           statusCode = 404;
           metas = {
@@ -159,6 +156,6 @@ spaServer({
   port: parseInt(process.env.PORT) || 80,
   indexFile: 'index-serve.html',
   serveDir: 'dist/',
-  logLevel: 'DEBUG',
-  //logLevel: 'ERROR',
+  //logLevel: 'DEBUG',
+  logLevel: 'ERROR',
 });
