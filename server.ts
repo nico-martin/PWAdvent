@@ -1,4 +1,5 @@
 import app from './app.json';
+
 require('dotenv').config();
 
 import spaServer from '@nico-martin/spa-server';
@@ -20,7 +21,14 @@ const imageOg =
 const defaultMetas = {
   title: `${app.title} 🎅 ${app.description}`,
   description: app.about,
-  'og:image': imageOg,
+  facebookImage: {
+    tag: 'meta',
+    attributes: {
+      name: 'image',
+      property: 'og:image',
+      content: imageOg,
+    },
+  },
   'og:title': `${app.title} 🎅 ${app.description}`,
   'og:description': app.about,
   'og:locale': 'en_US',
@@ -71,6 +79,21 @@ spaServer({
           metas = {
             title: `${respJson.title} 🎅 ${app.title}`,
             description: respJson.excerpt,
+            ...(respJson.previewImages.facebook
+              ? {
+                  facebookImage: {
+                    tag: 'meta',
+                    attributes: {
+                      name: 'image',
+                      property: 'og:image',
+                      content: respJson.previewImages.facebook,
+                    },
+                  },
+                }
+              : {}),
+            ...(respJson.previewImages.twitter
+              ? { 'twitter:image': respJson.previewImages.twitter }
+              : {}),
           };
           if (respJson.source) {
             metas['canonical'] = {
@@ -81,6 +104,7 @@ spaServer({
               },
             };
           }
+          console.log('///// metas', metas);
         } catch (error) {
           statusCode = 404;
           metas = {
@@ -135,5 +159,6 @@ spaServer({
   port: parseInt(process.env.PORT) || 80,
   indexFile: 'index-serve.html',
   serveDir: 'dist/',
-  logLevel: 'ERROR',
+  logLevel: 'DEBUG',
+  //logLevel: 'ERROR',
 });
