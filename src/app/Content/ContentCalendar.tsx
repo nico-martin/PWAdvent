@@ -67,7 +67,7 @@ const ContentCalendar = ({
             className="content-calendar__author"
             small={width <= 700}
           />
-          {'share' in navigator && (
+          {!('share' in navigator) && (
             <Button
               className={`content-share ${className}`}
               onClick={() =>
@@ -77,7 +77,7 @@ const ContentCalendar = ({
                   title: `${day.title} - PWAdvent`,
                 })
               }
-              layout="empty"
+              layout="ghost"
               round
               icon="mdi/share"
               iconRight
