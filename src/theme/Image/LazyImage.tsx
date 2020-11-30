@@ -91,7 +91,7 @@ const LazyImage = ({
             src={image.placeholder}
             data-src={mainImage.url}
             data-srcset={Object.entries(image.sizes)
-              .map(([width, url]) => `${url} ${width}w`)
+              .map(([name, { width, url }]) => `${url} ${width}w`)
               .join(', ')}
           />
         </React.Fragment>

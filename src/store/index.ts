@@ -5,7 +5,13 @@ import devtools from 'unistore/devtools';
 
 import { isDev, zeroPad } from '@utils/helpers';
 import { daysDB, pageDB } from '@store/idb';
-import { CALENDAR, DATE_START, DATE_TODAY, YEAR } from '@utils/calendar';
+import {
+  CALENDAR,
+  DATE_START,
+  DATE_TODAY,
+  DATE_TODAY_ZERO,
+  YEAR,
+} from '@utils/calendar';
 import dayjs from '@utils/dayjs';
 
 import { apiBase, apiKey } from '@utils/constants';
@@ -86,6 +92,19 @@ export const actions = (store: Store<State>) => ({
       return;
     }
 
+    // check if API has already released article
+    if (
+      dayjs(storeDay.data.date)
+        .tz('Antarctica/McMurdo', true)
+        .isAfter(DATE_TODAY_ZERO)
+    ) {
+      setDay(day, store, {
+        loading: false,
+        error: 'This article is not yet published.',
+      });
+      return;
+    }
+
     setDay(day, store, {
       loading: true,
     });
@@ -103,14 +122,6 @@ export const actions = (store: Store<State>) => ({
         apiKey ? `?apiKey=${apiKey}` : ''
       }`
     );
-
-    if (resp.status === 401 && !dayObject) {
-      setDay(day, store, {
-        loading: false,
-        error: 'This article is not yet published.',
-      });
-      return;
-    }
 
     // not found
     if (!resp.ok && !dayObject) {
