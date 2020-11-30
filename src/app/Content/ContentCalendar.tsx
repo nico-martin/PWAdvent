@@ -67,7 +67,7 @@ const ContentCalendar = ({
             className="content-calendar__author"
             small={width <= 700}
           />
-          {!('share' in navigator) && (
+          {'share' in navigator && (
             <Button
               className={`content-share ${className}`}
               onClick={() =>
