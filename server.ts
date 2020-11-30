@@ -27,14 +27,14 @@ const usePropery = (name, content) => ({
 });
 
 const defaultMetas = {
-  title: `${app.title} 🎅 ${app.description}`,
+  title: `${app.title} ❄ ${app.description}`,
   description: app.about,
   'og:image': usePropery('og:image', imageOg),
-  'og:title': usePropery('og:title', `${app.title} 🎅 ${app.description}`),
+  'og:title': usePropery('og:title', `${app.title} ❄ ${app.description}`),
   'og:description': usePropery('og:description', app.about),
   'og:locale': usePropery('og:locale', 'en_US'),
   'og:type': usePropery('og:type', 'website'),
-  'twitter:title': `${app.title} 🎅 ${app.description}`,
+  'twitter:title': `${app.title} ❄ ${app.description}`,
   'twitter:description': app.about,
   'twitter:image': imageTwitter,
   'twitter:card': 'summary_large_image',
@@ -79,7 +79,7 @@ spaServer({
           const respJson = await resp.json();
 
           metas = {
-            title: `${respJson.title} 🎅 ${app.title}`,
+            title: `${respJson.title} ❄ ${app.title}`,
             description: respJson.excerpt,
             ...(respJson.previewImages.facebook
               ? {
@@ -105,7 +105,7 @@ spaServer({
         } catch (error) {
           statusCode = 404;
           metas = {
-            title: `Error 404 🎅 ${app.title}`,
+            title: `Error 404 ❄ ${app.title}`,
           };
         }
         return {
@@ -123,7 +123,7 @@ spaServer({
         if (request.params.page === 'email-notification') {
           return {
             metas: {
-              title: `${app.title} 🎅 ${app.description}`,
+              title: `${app.title} ❄ ${app.description}`,
               description: app.about,
             },
           };
@@ -137,13 +137,13 @@ spaServer({
           }
           const respJson = await resp.json();
           metas = {
-            title: `${respJson.title} 🎅 ${app.title}`,
+            title: `${respJson.title} ❄ ${app.title}`,
             description: respJson.excerpt,
           };
         } catch (error) {
           statusCode = 404;
           metas = {
-            title: `Error 404 🎅 ${app.title}`,
+            title: `Error 404 ❄ ${app.title}`,
           };
         }
         return {
