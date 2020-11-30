@@ -41,7 +41,6 @@ export interface DayData {
 export interface Day {
   loading: boolean;
   error: string;
-  loaded: boolean;
   data: DayData;
 }
 

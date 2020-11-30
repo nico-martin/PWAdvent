@@ -13,10 +13,12 @@ const ContentCalendar = ({
   day,
   number,
   className = '',
+  error = '',
 }: {
   day: DayData;
   number: number;
   className?: string;
+  error?: string;
 }) => {
   const contentRef = React.useRef(null);
   const date = React.useMemo(() => dayjs(day.date), [day.date]);
@@ -30,6 +32,14 @@ const ContentCalendar = ({
   React.useEffect(() => {
     Prism.highlightAll();
   }, [contentRef, day.content]);
+
+  if (error !== '') {
+    return (
+      <div className={`content-calendar ${className}`}>
+        <p className="content-calendar__error">{error}</p>
+      </div>
+    );
+  }
 
   return (
     <div className={`content-calendar ${className}`}>

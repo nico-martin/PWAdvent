@@ -15,7 +15,6 @@ CALENDAR.map(day => {
   initialDays[day] = {
     loading: false,
     error: '',
-    loaded: false,
     data: {
       date: `${YEAR}-12-${zeroPad(day, 2)}`,
       title: '',
@@ -79,12 +78,11 @@ export const actions = (store: Store<State>) => ({
   loadDay: async ({ days }, day: number) => {
     const storeDay = days[day];
 
-    if (
-      !storeDay ||
-      !storeDay.data ||
-      !storeDay.data.date ||
-      dayjs(storeDay.data.date).isAfter(DATE_TODAY)
-    ) {
+    if (!storeDay || !storeDay.data || !storeDay.data.date) {
+      setDay(day, store, {
+        loading: false,
+        error: 'Something went wrong',
+      });
       return;
     }
 
@@ -96,22 +94,20 @@ export const actions = (store: Store<State>) => ({
     if (dayObject) {
       setDay(day, store, {
         loading: false,
-        loaded: true,
         data: dayObject,
       });
     }
 
-    //if (!dayObject) {
     const resp = await fetch(
       `${apiBase}wp-json/advent-calendar/v1/days/${day}/${
         apiKey ? `?apiKey=${apiKey}` : ''
       }`
     );
 
-    // not yet published
     if (resp.status === 401 && !dayObject) {
       setDay(day, store, {
         loading: false,
+        error: 'This article is not yet published.',
       });
       return;
     }
@@ -120,7 +116,7 @@ export const actions = (store: Store<State>) => ({
     if (!resp.ok && !dayObject) {
       setDay(day, store, {
         loading: false,
-        error: 'not found',
+        error: 'There is no Article for this day.',
       });
       return;
     }
@@ -141,7 +137,6 @@ export const actions = (store: Store<State>) => ({
 
     setDay(day, store, {
       loading: false,
-      loaded: true,
       data: dayObject,
     });
     await daysDB.set(String(day), { ...dayObject });

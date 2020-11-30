@@ -55,7 +55,7 @@ export default ({
             shadow ? 'shadowbox__header--shadow' : ''
           }`}
         >
-          {title && <h1 className="shadowbox__title">{title}</h1>}{' '}
+          {title !== null && <h1 className="shadowbox__title">{title}</h1>}{' '}
           <CloseButton className="shadowbox__close" onClick={onClose} />
         </header>
         <div className="shadowbox__content">{children}</div>
