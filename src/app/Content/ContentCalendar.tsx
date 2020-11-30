@@ -77,7 +77,7 @@ const ContentCalendar = ({
                   title: `${day.title} - PWAdvent`,
                 })
               }
-              layout="empty"
+              layout="ghost"
               round
               icon="mdi/share"
               iconRight
