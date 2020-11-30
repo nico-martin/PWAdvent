@@ -36,11 +36,17 @@ const Content = ({ className = '' }: { className?: string }) => {
   if (activeDay) {
     return (
       <ContentModal
-        title={activeDay.data.title}
+        title={
+          activeDay.error !== '' ? `Day ${slug}` : activeDay.data.title || ''
+        }
         onClose={() => push('/')}
         loading={activeDay.loading}
       >
-        <ContentCalendar day={activeDay.data} number={slug} />
+        <ContentCalendar
+          day={activeDay.data}
+          number={slug}
+          error={activeDay.error}
+        />
       </ContentModal>
     );
   }
