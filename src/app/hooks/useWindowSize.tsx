@@ -14,10 +14,14 @@ const useWindowSize = (): { width: number; height: number } => {
       });
 
     window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
     window.setTimeout(() => handleResize(), 1000);
     handleResize();
 
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
+    };
   }, []);
 
   return windowSize;
