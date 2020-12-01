@@ -22,7 +22,7 @@ const touchLength = 100;
 const App = () => {
   const { setOffline, setMenuOpen } = useActions(actions);
   const { menuOpen } = useStoreState<State>(['menuOpen']);
-  const [isMobile, setIsMobile] = React.useState<boolean>(false);
+  const [isMobile, setIsMobile] = React.useState<boolean>(null);
   const [transition, setTransition] = React.useState<boolean>(false);
   const windowSize = useWindowSize();
   const [show, setShow] = React.useState<boolean>(false);
@@ -85,10 +85,12 @@ const App = () => {
         className="app"
         style={{ opacity: show ? 1 : 0 }}
       >
-        <div className="app__inner">
-          <About className="app__sidebar" />
-          <Calendar className="app__content" />
-        </div>
+        {isMobile !== null && (
+          <div className="app__inner">
+            <About className="app__sidebar" />
+            <Calendar className="app__content" />
+          </div>
+        )}
       </div>
       <Snow className="app__snow" />
     </React.Fragment>

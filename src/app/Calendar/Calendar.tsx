@@ -15,19 +15,23 @@ const Calendar = ({ className = '' }: { className?: string }) => {
   const window = useWindowSize();
   const calendarRef = React.useRef(null);
   const [height, setHeight] = React.useState<number>(null);
+  const [opacity, setOpacity] = React.useState<number>(0);
   const { setMenuOpen } = useActions(actions);
   const { menuOpen } = useStoreState<State>(['menuOpen']);
 
   React.useEffect(() => {
     if (calendarRef.current && window.width) {
-      setHeight(
-        Math.round(
-          calendarRef.current.clientWidth *
-            (window.height / window.width >= 1 ? 1.3 : 0.9)
-        )
+      const height = Math.round(
+        calendarRef.current.clientWidth *
+          (window.height / window.width >= 1 ? 1.3 : 0.9)
       );
+      setHeight(height);
     }
   }, [window, calendarRef]);
+
+  React.useEffect(() => {
+    height && setOpacity(1);
+  }, [height]);
 
   return (
     <div className={`calendar ${className}`}>
@@ -40,12 +44,16 @@ const Calendar = ({ className = '' }: { className?: string }) => {
         </button>
       )}
       <CalendarHeader className="calendar__header" />
-      <div className="calendar__calendar" style={{ height }} ref={calendarRef}>
+      <div
+        className="calendar__calendar"
+        style={{
+          height,
+          opacity,
+        }}
+        ref={calendarRef}
+      >
         {daysOrder.map(day => (
-          <div
-            //style={{ gridArea: `cal${zeroPad(parseInt(day), 2)}` }}
-            className={`calendar__item calendar__item--${day}`}
-          >
+          <div className={`calendar__item calendar__item--${day}`}>
             <CalendarDay day={parseInt(day)} />
           </div>
         ))}
