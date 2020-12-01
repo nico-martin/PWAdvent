@@ -5,27 +5,11 @@ import { Button, PortalBox, SVG } from '@theme';
 import './AboutControls.css';
 import EmailSignup from '@app/About/EmailSignup';
 import PushNotifications from '@app/About/PushNotifications';
-import { DATE_TODAY, DATE_START } from '@utils/calendar';
 import { appDescription, appTitle } from '@utils/constants';
-import { settingsDB } from '@store/idb';
 
 const AboutControls = ({ className = '' }: { className?: string }) => {
   const [emailBox, setEmailBox] = React.useState<boolean>(false);
   const [pushBox, setPushBox] = React.useState<boolean>(false);
-
-  React.useEffect(() => {
-    return;
-    // todo: need to find a better way
-    settingsDB.get('emailPopupClosed').then(closed => {
-      if (
-        DATE_TODAY.isBefore(DATE_START) &&
-        window.location.pathname === '/' &&
-        !closed
-      ) {
-        setEmailBox(true);
-      }
-    });
-  }, []);
 
   return (
     <React.Fragment>
