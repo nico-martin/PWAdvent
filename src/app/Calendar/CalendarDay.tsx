@@ -1,8 +1,7 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { useStoreState, useActions } from 'unistore-hooks';
-import { actions } from '@store/index';
+import { useStoreState } from 'unistore-hooks';
 import { State } from '@store/types';
 
 import './CalendarDay.css';
@@ -19,7 +18,6 @@ const CalendarDay = ({
   day: number;
   className?: string;
 }) => {
-  const { loadDay } = useActions(actions);
   const { days: storeDays } = useStoreState<State>(['days']);
 
   const dayObject = React.useMemo(() => storeDays[day], [storeDays[day], day]);
@@ -27,14 +25,6 @@ const CalendarDay = ({
     () => !dayjs(dayObject.data.date).isAfter(DATE_TODAY),
     [dayObject]
   );
-  const isLoaded = React.useMemo(() => !dayObject.loading && isActive, [
-    dayObject,
-    isActive,
-  ]);
-
-  React.useEffect(() => {
-    loadDay(day);
-  }, [day]);
 
   const Wrapper = ({
     children,
@@ -43,7 +33,7 @@ const CalendarDay = ({
     children: any;
     [key: string]: any;
   }) =>
-    isLoaded ? (
+    isActive ? (
       <Link to={`/day/${day}/`} {...props}>
         {children}
       </Link>

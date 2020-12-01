@@ -23,7 +23,7 @@ const Calendar = ({ className = '' }: { className?: string }) => {
     if (calendarRef.current && window.width) {
       const isPortrait = window.height / window.width >= 1;
       const maxHeight = window.height - 200;
-      console.log({ isPortrait });
+
       let height = Math.round(
         calendarRef.current.clientWidth * (isPortrait ? 1.3 : 0.9)
       );

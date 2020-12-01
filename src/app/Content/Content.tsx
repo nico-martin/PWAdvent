@@ -2,10 +2,12 @@ import React from 'react';
 import { useParams, useHistory, Route, Switch } from 'react-router-dom';
 import Helmet from 'react-helmet';
 
+import { useStoreState, useActions } from 'unistore-hooks';
+import { actions } from '@store/index';
+import { State } from '@store/types';
+
 import './Content.css';
 
-import { useStoreState } from 'unistore-hooks';
-import { State } from '@store/types';
 import { ContentModal } from '@theme';
 import { Day } from '@app/types';
 
@@ -14,6 +16,7 @@ import ContentPage from './ContentPage';
 import { metaTitle } from '@utils/metas';
 
 const Content = ({ className = '' }: { className?: string }) => {
+  const { loadDay } = useActions(actions);
   const { page = null, slug = null } = useParams();
   const { push } = useHistory();
 
@@ -24,6 +27,10 @@ const Content = ({ className = '' }: { className?: string }) => {
     () => (active !== false && page === 'day' && storeDays[slug]) || false,
     [active, storeDays[slug], slug]
   );
+
+  React.useEffect(() => {
+    activeDay && loadDay(slug);
+  }, [slug]);
 
   if (!active) {
     return (
