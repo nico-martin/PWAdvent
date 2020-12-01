@@ -134,8 +134,19 @@
       @media (max-width: 700px) {
         width: 100%;
         max-width: 100%;
+        bottom: 0;
+        top: 0;
         max-height: 100vh;
-        height: 100vh;
+        height: auto;
+        transform: translateX(-50%) translateY(10%) scale(0.9);
+      }
+    }
+
+    &[data-visible='true'] {
+      .shadowbox__box {
+        @media (max-width: 700px) {
+          transform: translateX(-50%) translateY(0) scale(1);
+        }
       }
     }
   }
