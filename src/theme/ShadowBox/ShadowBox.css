@@ -62,6 +62,12 @@
         transform: translateY(30%);
       }
     }
+
+    &--ios {
+      &::after {
+        display: none;
+      }
+    }
   }
 
   &__title {
