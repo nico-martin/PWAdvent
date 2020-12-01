@@ -53,17 +53,32 @@ const CalendarDay = ({
 
   return (
     <Wrapper
-      className={`${className} calendar-day ${
-        isActive ? 'calendar-day--active' : ''
-      }`}
+      className={cn(className, 'calendar-day', {
+        'calendar-day--active': isActive,
+      })}
     >
-      <SVG
-        className={cn('calendar-day__snow', `calendar-day__snow--${day}`)}
-        path={`snowwall-${zeroPad(day, 2)}.svg`}
-      />
       <div className="calendar-day__inner">{day}</div>
     </Wrapper>
   );
 };
 
-export default CalendarDay;
+const CalendarDayWrapper = ({
+  day,
+  className = '',
+}: {
+  day: number;
+  className?: string;
+}) => (
+  <div className={cn(className, 'calendar-day-wrapper')}>
+    <SVG
+      className={cn(
+        'calendar-day-wrapper__snow',
+        `calendar-day-wrapper__snow--${day}`
+      )}
+      path={`snowwall-${zeroPad(day, 2)}.svg`}
+    />
+    <CalendarDay day={day} className={cn('calendar-day-wrapper__inner')} />
+  </div>
+);
+
+export default CalendarDayWrapper;
