@@ -107,6 +107,7 @@ export const actions = (store: Store<State>) => ({
 
     setDay(day, store, {
       loading: true,
+      error: '',
     });
 
     let dayObject = await daysDB.get(String(day));
