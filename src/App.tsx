@@ -18,6 +18,7 @@ import { Snow } from '@theme';
 let startX = 0;
 let currentX = 0;
 const touchLength = 100;
+const MOBILE_BP = 900;
 
 const App = () => {
   const { setOffline, setMenuOpen } = useActions(actions);
@@ -31,10 +32,10 @@ const App = () => {
     if (windowSize.width === null) {
       return;
     }
-    if (windowSize.width >= 1000 && isMobile) {
+    if (windowSize.width >= MOBILE_BP && isMobile) {
       setMenuOpen(false);
       setIsMobile(false);
-    } else if (windowSize.width < 1000) {
+    } else if (windowSize.width < MOBILE_BP) {
       setTimeout(() => setTransition(true), 200);
       setIsMobile(true);
     }
