@@ -1,7 +1,9 @@
 import React from 'react';
+import cn from '@utils/classnames';
+
 import './ShadowBox.css';
 import { CloseButton } from '../index';
-import cn from '@utils/classnames';
+import { isIos } from '@utils/helpers';
 
 export default ({
   title,
@@ -51,9 +53,10 @@ export default ({
         }}
       >
         <header
-          className={`shadowbox__header ${
-            shadow ? 'shadowbox__header--shadow' : ''
-          }`}
+          className={cn('shadowbox__header', {
+            'shadowbox__header--shadow': shadow,
+            'shadowbox__header--ios': isIos,
+          })}
         >
           {title !== null && <h1 className="shadowbox__title">{title}</h1>}{' '}
           <CloseButton className="shadowbox__close" onClick={onClose} />

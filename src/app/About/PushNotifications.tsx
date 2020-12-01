@@ -6,7 +6,7 @@ import cn from '@utils/classnames';
 
 import { State } from '@store/types';
 import { Button, Loader, Notification, SVG } from '@theme';
-import { urlB64ToUint8Array } from '@utils/helpers';
+import { isIos, urlB64ToUint8Array } from '@utils/helpers';
 
 import './PushNotifications.css';
 import { apiBase } from '@utils/constants';
@@ -16,19 +16,6 @@ const PushNotifications = ({ className = '' }: { className?: string }) => {
   const [isSubscribed, setIsSubscribed] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
 
-  const isIos = React.useMemo(
-    () =>
-      [
-        'iPad Simulator',
-        'iPhone Simulator',
-        'iPod Simulator',
-        'iPad',
-        'iPhone',
-        'iPod',
-      ].includes(navigator.platform) ||
-      (navigator.userAgent.includes('Mac') && 'ontouchend' in document),
-    []
-  );
   const supportsPush = 'PushManager' in window && 'serviceWorker' in navigator;
 
   React.useEffect(() => {
