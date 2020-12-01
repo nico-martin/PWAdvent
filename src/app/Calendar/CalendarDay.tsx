@@ -23,7 +23,7 @@ const CalendarDay = ({
   const { days: storeDays } = useStoreState<State>(['days']);
 
   const dayObject = React.useMemo(() => storeDays[day], [storeDays[day], day]);
-  const isLoaded = React.useMemo(() => dayObject.loaded, [dayObject]);
+  const isLoaded = React.useMemo(() => !dayObject.loading, [dayObject]);
   const isActive = React.useMemo(
     () => !dayjs(dayObject.data.date).isAfter(DATE_TODAY),
     [dayObject]
