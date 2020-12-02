@@ -80,7 +80,7 @@ spaServer({
 
           metas = {
             title: `${respJson.title} ❄ ${app.title}`,
-            description: respJson.excerpt,
+            description: respJson.preview,
             ...(respJson.previewImages.facebook
               ? {
                   'og:image': usePropery(
