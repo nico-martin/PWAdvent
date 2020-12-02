@@ -27,20 +27,13 @@
   }
 
   code {
-    &:before {
-      content: '';
-      position: absolute;
-      bottom: -0.1em;
-      right: 0.1em;
-      left: 0.1em;
-      top: -0.1em;
-      background-color: #2d2d2d;
-      z-index: -1;
-      border-radius: 4px;
-    }
-
-    position: relative;
+    background-color: #2d2d2d;
+    border-radius: 3px;
     color: #fff;
-    padding: 0 0.5em;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    padding: .1rem .3rem .2rem;
   }
 }
