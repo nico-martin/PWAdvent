@@ -1,5 +1,5 @@
 /* PrismJS 1.22.0
-https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript+json+sass+scss&plugins=line-numbers */
+https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript+json+sass+scss+typescript+typoscript&plugins=line-numbers */
 var _self =
     'undefined' != typeof window
       ? window
@@ -10,14 +10,14 @@ var _self =
   Prism = (function(u) {
     var c = /\blang(?:uage)?-([\w-]+)\b/i,
       n = 0,
-      M = {
+      _ = {
         manual: u.Prism && u.Prism.manual,
         disableWorkerMessageHandler:
           u.Prism && u.Prism.disableWorkerMessageHandler,
         util: {
           encode: function e(n) {
-            return n instanceof W
-              ? new W(n.type, e(n.content), n.alias)
+            return n instanceof M
+              ? new M(n.type, e(n.content), n.alias)
               : Array.isArray(n)
               ? n.map(e)
               : n
@@ -35,15 +35,15 @@ var _self =
           },
           clone: function t(e, r) {
             var a, n;
-            switch (((r = r || {}), M.util.type(e))) {
+            switch (((r = r || {}), _.util.type(e))) {
               case 'Object':
-                if (((n = M.util.objId(e)), r[n])) return r[n];
+                if (((n = _.util.objId(e)), r[n])) return r[n];
                 for (var i in ((a = {}), (r[n] = a), e))
                   e.hasOwnProperty(i) && (a[i] = t(e[i], r));
                 return a;
               case 'Array':
                 return (
-                  (n = M.util.objId(e)),
+                  (n = _.util.objId(e)),
                   r[n]
                     ? r[n]
                     : ((a = []),
@@ -89,12 +89,12 @@ var _self =
         },
         languages: {
           extend: function(e, n) {
-            var t = M.util.clone(M.languages[e]);
+            var t = _.util.clone(_.languages[e]);
             for (var r in n) t[r] = n[r];
             return t;
           },
           insertBefore: function(t, e, n, r) {
-            var a = (r = r || M.languages)[t],
+            var a = (r = r || _.languages)[t],
               i = {};
             for (var l in a)
               if (a.hasOwnProperty(l)) {
@@ -105,7 +105,7 @@ var _self =
             var s = r[t];
             return (
               (r[t] = i),
-              M.languages.DFS(M.languages, function(e, n) {
+              _.languages.DFS(_.languages, function(e, n) {
                 n === s && e != t && (this[e] = i);
               }),
               i
@@ -113,12 +113,12 @@ var _self =
           },
           DFS: function e(n, t, r, a) {
             a = a || {};
-            var i = M.util.objId;
+            var i = _.util.objId;
             for (var l in n)
               if (n.hasOwnProperty(l)) {
                 t.call(n, l, n[l], r || l);
                 var o = n[l],
-                  s = M.util.type(o);
+                  s = _.util.type(o);
                 'Object' !== s || a[i(o)]
                   ? 'Array' !== s || a[i(o)] || ((a[i(o)] = !0), e(o, t, l, a))
                   : ((a[i(o)] = !0), e(o, t, null, a));
@@ -127,7 +127,7 @@ var _self =
         },
         plugins: {},
         highlightAll: function(e, n) {
-          M.highlightAllUnder(document, e, n);
+          _.highlightAllUnder(document, e, n);
         },
         highlightAllUnder: function(e, n, t) {
           var r = {
@@ -136,17 +136,17 @@ var _self =
             selector:
               'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code',
           };
-          M.hooks.run('before-highlightall', r),
+          _.hooks.run('before-highlightall', r),
             (r.elements = Array.prototype.slice.apply(
               r.container.querySelectorAll(r.selector)
             )),
-            M.hooks.run('before-all-elements-highlight', r);
+            _.hooks.run('before-all-elements-highlight', r);
           for (var a, i = 0; (a = r.elements[i++]); )
-            M.highlightElement(a, !0 === n, r.callback);
+            _.highlightElement(a, !0 === n, r.callback);
         },
         highlightElement: function(e, n, t) {
-          var r = M.util.getLanguage(e),
-            a = M.languages[r];
+          var r = _.util.getLanguage(e),
+            a = _.languages[r];
           e.className =
             e.className.replace(c, '').replace(/\s+/g, ' ') + ' language-' + r;
           var i = e.parentElement;
@@ -159,17 +159,17 @@ var _self =
           var l = { element: e, language: r, grammar: a, code: e.textContent };
           function o(e) {
             (l.highlightedCode = e),
-              M.hooks.run('before-insert', l),
+              _.hooks.run('before-insert', l),
               (l.element.innerHTML = l.highlightedCode),
-              M.hooks.run('after-highlight', l),
-              M.hooks.run('complete', l),
+              _.hooks.run('after-highlight', l),
+              _.hooks.run('complete', l),
               t && t.call(l.element);
           }
-          if ((M.hooks.run('before-sanity-check', l), !l.code))
-            return M.hooks.run('complete', l), void (t && t.call(l.element));
-          if ((M.hooks.run('before-highlight', l), l.grammar))
+          if ((_.hooks.run('before-sanity-check', l), !l.code))
+            return _.hooks.run('complete', l), void (t && t.call(l.element));
+          if ((_.hooks.run('before-highlight', l), l.grammar))
             if (n && u.Worker) {
-              var s = new Worker(M.filename);
+              var s = new Worker(_.filename);
               (s.onmessage = function(e) {
                 o(e.data);
               }),
@@ -180,16 +180,16 @@ var _self =
                     immediateClose: !0,
                   })
                 );
-            } else o(M.highlight(l.code, l.grammar, l.language));
-          else o(M.util.encode(l.code));
+            } else o(_.highlight(l.code, l.grammar, l.language));
+          else o(_.util.encode(l.code));
         },
         highlight: function(e, n, t) {
           var r = { code: e, grammar: n, language: t };
           return (
-            M.hooks.run('before-tokenize', r),
-            (r.tokens = M.tokenize(r.code, r.grammar)),
-            M.hooks.run('after-tokenize', r),
-            W.stringify(M.util.encode(r.tokens), r.language)
+            _.hooks.run('before-tokenize', r),
+            (r.tokens = _.tokenize(r.code, r.grammar)),
+            _.hooks.run('after-tokenize', r),
+            M.stringify(_.util.encode(r.tokens), r.language)
           );
         },
         tokenize: function(e, n) {
@@ -200,7 +200,7 @@ var _self =
           }
           var a = new i();
           return (
-            I(a, a.head, e),
+            z(a, a.head, e),
             (function e(n, t, r, a, i, l) {
               for (var o in r)
                 if (r.hasOwnProperty(o) && r[o]) {
@@ -212,68 +212,59 @@ var _self =
                       g = c.inside,
                       f = !!c.lookbehind,
                       h = !!c.greedy,
-                      d = 0,
-                      v = c.alias;
+                      d = c.alias;
                     if (h && !c.pattern.global) {
-                      var p = c.pattern.toString().match(/[imsuy]*$/)[0];
-                      c.pattern = RegExp(c.pattern.source, p + 'g');
+                      var v = c.pattern.toString().match(/[imsuy]*$/)[0];
+                      c.pattern = RegExp(c.pattern.source, v + 'g');
                     }
                     for (
-                      var m = c.pattern || c, y = a.next, k = i;
-                      y !== t.tail && !(l && k >= l.reach);
-                      k += y.value.length, y = y.next
+                      var p = c.pattern || c, m = a.next, y = i;
+                      m !== t.tail && !(l && y >= l.reach);
+                      y += m.value.length, m = m.next
                     ) {
-                      var b = y.value;
+                      var k = m.value;
                       if (t.length > n.length) return;
-                      if (!(b instanceof W)) {
-                        var x = 1;
-                        if (h && y != t.tail.prev) {
-                          m.lastIndex = k;
-                          var w = m.exec(n);
-                          if (!w) break;
-                          var A = w.index + (f && w[1] ? w[1].length : 0),
-                            P = w.index + w[0].length,
-                            S = k;
-                          for (S += y.value.length; S <= A; )
-                            (y = y.next), (S += y.value.length);
+                      if (!(k instanceof M)) {
+                        var b,
+                          x = 1;
+                        if (h) {
+                          if (!(b = W(p, y, n, f))) break;
+                          var w = b.index,
+                            A = b.index + b[0].length,
+                            P = y;
+                          for (P += m.value.length; P <= w; )
+                            (m = m.next), (P += m.value.length);
                           if (
-                            ((S -= y.value.length),
-                            (k = S),
-                            y.value instanceof W)
+                            ((P -= m.value.length),
+                            (y = P),
+                            m.value instanceof M)
                           )
                             continue;
                           for (
-                            var E = y;
-                            E !== t.tail &&
-                            (S < P || 'string' == typeof E.value);
-                            E = E.next
+                            var S = m;
+                            S !== t.tail &&
+                            (P < A || 'string' == typeof S.value);
+                            S = S.next
                           )
-                            x++, (S += E.value.length);
-                          x--, (b = n.slice(k, S)), (w.index -= k);
-                        } else {
-                          m.lastIndex = 0;
-                          var w = m.exec(b);
-                        }
-                        if (w) {
-                          f && (d = w[1] ? w[1].length : 0);
-                          var A = w.index + d,
-                            O = w[0].slice(d),
-                            P = A + O.length,
-                            L = b.slice(0, A),
-                            N = b.slice(P),
-                            j = k + b.length;
-                          l && j > l.reach && (l.reach = j);
-                          var C = y.prev;
-                          L && ((C = I(t, C, L)), (k += L.length)), z(t, C, x);
-                          var _ = new W(o, g ? M.tokenize(O, g) : O, v, O);
-                          (y = I(t, C, _)),
-                            N && I(t, y, N),
-                            1 < x &&
-                              e(n, t, r, y.prev, k, {
-                                cause: o + ',' + u,
-                                reach: j,
-                              });
-                        }
+                            x++, (P += S.value.length);
+                          x--, (k = n.slice(y, P)), (b.index -= y);
+                        } else if (!(b = W(p, 0, k, f))) continue;
+                        var w = b.index,
+                          E = b[0],
+                          O = k.slice(0, w),
+                          L = k.slice(w + E.length),
+                          N = y + k.length;
+                        l && N > l.reach && (l.reach = N);
+                        var j = m.prev;
+                        O && ((j = z(t, j, O)), (y += O.length)), I(t, j, x);
+                        var C = new M(o, g ? _.tokenize(E, g) : E, d, E);
+                        (m = z(t, j, C)),
+                          L && z(t, m, L),
+                          1 < x &&
+                            e(n, t, r, m.prev, y, {
+                              cause: o + ',' + u,
+                              reach: N,
+                            });
                       }
                     }
                   }
@@ -290,39 +281,48 @@ var _self =
         hooks: {
           all: {},
           add: function(e, n) {
-            var t = M.hooks.all;
+            var t = _.hooks.all;
             (t[e] = t[e] || []), t[e].push(n);
           },
           run: function(e, n) {
-            var t = M.hooks.all[e];
+            var t = _.hooks.all[e];
             if (t && t.length) for (var r, a = 0; (r = t[a++]); ) r(n);
           },
         },
-        Token: W,
+        Token: M,
       };
-    function W(e, n, t, r) {
+    function M(e, n, t, r) {
       (this.type = e),
         (this.content = n),
         (this.alias = t),
         (this.length = 0 | (r || '').length);
+    }
+    function W(e, n, t, r) {
+      e.lastIndex = n;
+      var a = e.exec(t);
+      if (a && r && a[1]) {
+        var i = a[1].length;
+        (a.index += i), (a[0] = a[0].slice(i));
+      }
+      return a;
     }
     function i() {
       var e = { value: null, prev: null, next: null },
         n = { value: null, prev: e, next: null };
       (e.next = n), (this.head = e), (this.tail = n), (this.length = 0);
     }
-    function I(e, n, t) {
+    function z(e, n, t) {
       var r = n.next,
         a = { value: t, prev: n, next: r };
       return (n.next = a), (r.prev = a), e.length++, a;
     }
-    function z(e, n, t) {
+    function I(e, n, t) {
       for (var r = n.next, a = 0; a < t && r !== e.tail; a++) r = r.next;
       ((n.next = r).prev = n), (e.length -= a);
     }
     if (
-      ((u.Prism = M),
-      (W.stringify = function n(e, t) {
+      ((u.Prism = _),
+      (M.stringify = function n(e, t) {
         if ('string' == typeof e) return e;
         if (Array.isArray(e)) {
           var r = '';
@@ -346,7 +346,7 @@ var _self =
           (Array.isArray(i)
             ? Array.prototype.push.apply(a.classes, i)
             : a.classes.push(i)),
-          M.hooks.run('wrap', a);
+          _.hooks.run('wrap', a);
         var l = '';
         for (var o in a.attributes)
           l +=
@@ -373,7 +373,7 @@ var _self =
     )
       return (
         u.addEventListener &&
-          (M.disableWorkerMessageHandler ||
+          (_.disableWorkerMessageHandler ||
             u.addEventListener(
               'message',
               function(e) {
@@ -381,22 +381,22 @@ var _self =
                   t = n.language,
                   r = n.code,
                   a = n.immediateClose;
-                u.postMessage(M.highlight(r, M.languages[t], t)),
+                u.postMessage(_.highlight(r, _.languages[t], t)),
                   a && u.close();
               },
               !1
             )),
-        M
+        _
       );
-    var e = M.util.currentScript();
+    var e = _.util.currentScript();
     function t() {
-      M.manual || M.highlightAll();
+      _.manual || _.highlightAll();
     }
     if (
       (e &&
-        ((M.filename = e.src),
-        e.hasAttribute('data-manual') && (M.manual = !0)),
-      !M.manual)
+        ((_.filename = e.src),
+        e.hasAttribute('data-manual') && (_.manual = !0)),
+      !_.manual)
     ) {
       var r = document.readyState;
       'loading' === r || ('interactive' === r && e && e.defer)
@@ -405,7 +405,7 @@ var _self =
         ? window.requestAnimationFrame(t)
         : window.setTimeout(t, 16);
     }
-    return M;
+    return _;
   })(_self);
 'undefined' != typeof module && module.exports && (module.exports = Prism),
   'undefined' != typeof global && (global.Prism = Prism);
@@ -760,7 +760,7 @@ Prism.languages.clike = {
 })),
   Prism.languages.insertBefore('scss', 'atrule', {
     keyword: [
-      /@(?:if|else(?: if)?|for|each|while|import|extend|debug|warn|mixin|include|function|return|content)/i,
+      /@(?:if|else(?: if)?|forward|for|each|while|import|use|extend|debug|warn|mixin|include|function|return|content)\b/i,
       { pattern: /( +)(?:from|through)(?= )/, lookbehind: !0 },
     ],
   }),
@@ -768,6 +768,10 @@ Prism.languages.clike = {
     variable: /\$[-\w]+|#\{\$[-\w]+\}/,
   }),
   Prism.languages.insertBefore('scss', 'function', {
+    'module-modifier': {
+      pattern: /\b(?:as|with|show|hide)\b/i,
+      alias: 'keyword',
+    },
     placeholder: { pattern: /%[-\w]+/, alias: 'selector' },
     statement: { pattern: /\B!(?:default|optional)\b/i, alias: 'keyword' },
     boolean: /\b(?:true|false)\b/,
@@ -778,6 +782,79 @@ Prism.languages.clike = {
     },
   }),
   (Prism.languages.scss.atrule.inside.rest = Prism.languages.scss);
+!(function(e) {
+  (e.languages.typescript = e.languages.extend('javascript', {
+    'class-name': {
+      pattern: /(\b(?:class|extends|implements|instanceof|interface|new|type)\s+)(?!keyof\b)[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?:\s*<(?:[^<>]|<(?:[^<>]|<[^<>]*>)*>)*>)?/,
+      lookbehind: !0,
+      greedy: !0,
+      inside: null,
+    },
+    keyword: /\b(?:abstract|as|asserts|async|await|break|case|catch|class|const|constructor|continue|debugger|declare|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|is|keyof|let|module|namespace|new|null|of|package|private|protected|public|readonly|return|require|set|static|super|switch|this|throw|try|type|typeof|undefined|var|void|while|with|yield)\b/,
+    builtin: /\b(?:string|Function|any|number|boolean|Array|symbol|console|Promise|unknown|never)\b/,
+  })),
+    delete e.languages.typescript.parameter;
+  var n = e.languages.extend('typescript', {});
+  delete n['class-name'],
+    (e.languages.typescript['class-name'].inside = n),
+    e.languages.insertBefore('typescript', 'function', {
+      'generic-function': {
+        pattern: /#?[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*\s*<(?:[^<>]|<(?:[^<>]|<[^<>]*>)*>)*>(?=\s*\()/,
+        greedy: !0,
+        inside: {
+          function: /^#?[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*/,
+          generic: { pattern: /<[\s\S]+/, alias: 'class-name', inside: n },
+        },
+      },
+    }),
+    (e.languages.ts = e.languages.typescript);
+})(Prism);
+!(function(E) {
+  var n = /\b(?:ACT|ACTIFSUB|CARRAY|CASE|CLEARGIF|COA|COA_INT|CONSTANTS|CONTENT|CUR|EDITPANEL|EFFECT|EXT|FILE|FLUIDTEMPLATE|FORM|FRAME|FRAMESET|GIFBUILDER|GMENU|GMENU_FOLDOUT|GMENU_LAYERS|GP|HMENU|HRULER|HTML|IENV|IFSUB|IMAGE|IMGMENU|IMGMENUITEM|IMGTEXT|IMG_RESOURCE|INCLUDE_TYPOSCRIPT|JSMENU|JSMENUITEM|LLL|LOAD_REGISTER|NO|PAGE|RECORDS|RESTORE_REGISTER|TEMPLATE|TEXT|TMENU|TMENUITEM|TMENU_LAYERS|USER|USER_INT|_GIFBUILDER|global|globalString|globalVar)\b/;
+  (E.languages.typoscript = {
+    comment: [
+      { pattern: /(^|[^\\])\/\*[\s\S]*?(?:\*\/|$)/, lookbehind: !0 },
+      {
+        pattern: /(^|[^\\:= \t]|(?:^|[^= \t])[ \t]+)\/\/.*/,
+        lookbehind: !0,
+        greedy: !0,
+      },
+      { pattern: /(^|[^"'])#.*/, lookbehind: !0, greedy: !0 },
+    ],
+    function: [
+      {
+        pattern: /<INCLUDE_TYPOSCRIPT:\s*source\s*=\s*(?:"[^"\r\n]*"|'[^'\r\n]*')\s*>/,
+        inside: {
+          string: {
+            pattern: /"[^"\r\n]*"|'[^'\r\n]*'/,
+            inside: { keyword: n },
+          },
+          keyword: { pattern: /INCLUDE_TYPOSCRIPT/ },
+        },
+      },
+      {
+        pattern: /@import\s*(?:"[^"\r\n]*"|'[^'\r\n]*')/,
+        inside: { string: /"[^"\r\n]*"|'[^'\r\n]*'/ },
+      },
+    ],
+    string: {
+      pattern: /^([^=]*=[< ]?)(?:(?!]\n).)*/,
+      lookbehind: !0,
+      inside: {
+        function: /{\$.*}/,
+        keyword: n,
+        number: /^[0-9]+$/,
+        punctuation: /[,|:]/,
+      },
+    },
+    keyword: n,
+    number: { pattern: /[0-9]+\s*[.{=]/, inside: { operator: /[.{=]/ } },
+    tag: { pattern: /\.?[\w-\\]+\.?/, inside: { punctuation: /\./ } },
+    punctuation: /[{}[\];(),.:|]/,
+    operator: /[<>]=?|[!=]=?=?|--?|\+\+?|&&?|\|\|?|[?*/~^%]/,
+  }),
+    (E.languages.tsconfig = E.languages.typoscript);
+})(Prism);
 !(function() {
   if ('undefined' != typeof self && self.Prism && self.document) {
     var o = 'line-numbers',
