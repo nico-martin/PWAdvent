@@ -36,4 +36,23 @@
     box-decoration-break: clone;
     padding: .1rem .3rem .2rem;
   }
+
+  .wp-block-separator {
+    border-color: transparent;
+    position: relative;
+    margin: var(--space-xl) 0;
+
+    &:after {
+      background-color: currentColor;
+      height: 1px;
+      opacity: 0.5;
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 25%;
+      display: block;
+      transform: translateX(0) translateY(-50%);
+    }
+  }
 }
