@@ -17,8 +17,41 @@
         margin: 0 auto;
       }
     }
+  }
 
+  .wp-block-table {
+    width: 100%;
+    overflow-x: auto;
+
+    table {
+      width: 100%;
+      border-spacing: 0;
+      min-width: 700px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.3em 0.6em;
+    }
+
+    td {
+      border: 0 solid var(--c-border-dark);
+      border-right-width: 1px;
+      border-top-width: 1px;
+
+      &:first-child {
+        border-left-width: 1px;
+      }
+    }
+
+    tr:last-child td {
+      border-bottom-width: 1px;
+    }
+  }
+
+  .wp-block-table, .wp-block-image {
     figcaption {
+      width: 100%;
       font-style: italic;
       font-size: var(--fs-small);
       margin-top: var(--space-s);
