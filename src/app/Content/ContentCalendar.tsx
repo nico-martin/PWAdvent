@@ -46,14 +46,6 @@ const ContentCalendar = ({
       <p className="content-calendar__date">
         <b>Day {number}:</b> {date && date.format('L')}
       </p>
-      {originalSource && (
-        <Notification className="content-calendar__cannonical">
-          This article was originally published on{' '}
-          <a href={originalSource.href} target="_blank">
-            {originalSource.host}
-          </a>
-        </Notification>
-      )}
       {day.excerpt && (
         <p className="content-calendar__excerpt">{day.excerpt}</p>
       )}
@@ -95,6 +87,14 @@ const ContentCalendar = ({
           __html: day.content,
         }}
       />
+      {originalSource && (
+        <Notification className="content-calendar__cannonical">
+          This article was originally published on{' '}
+          <a href={originalSource.href} target="_blank">
+            {originalSource.host}
+          </a>
+        </Notification>
+      )}
     </div>
   );
 };
