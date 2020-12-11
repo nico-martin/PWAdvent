@@ -11,7 +11,11 @@
   }
 
   &__date, &__cannonical {
-    margin-bottom: var(--space);
+    margin-top: var(--space);
+  }
+
+  &__date {
+    margin-bottom: var(--space-s);
   }
 
   &__meta,
