@@ -29,9 +29,25 @@ const ContentCalendar = ({
     [day.source]
   );
 
+  const content = React.useMemo(() => {
+    const regex = /<code class="language-markup">((.|\n)*?)<\/code>/gm;
+    let m;
+    let c = day.content;
+
+    while ((m = regex.exec(c)) !== null) {
+      if (m.index === regex.lastIndex) {
+        regex.lastIndex++;
+      }
+
+      c = c.replace(m[1], m[1].replace(/</g, '&lt;'));
+    }
+
+    return c;
+  }, [day.content]);
+
   React.useEffect(() => {
     Prism.highlightAll();
-  }, [contentRef, day.content]);
+  }, [contentRef, content]);
 
   if (error !== '') {
     return (
@@ -84,7 +100,7 @@ const ContentCalendar = ({
         ref={contentRef}
         className="content-calendar__content gutenberg-content"
         dangerouslySetInnerHTML={{
-          __html: day.content,
+          __html: content,
         }}
       />
       {originalSource && (

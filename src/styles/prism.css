@@ -1,8 +1,13 @@
 /* PrismJS 1.22.0
-https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript+json+sass+scss&plugins=line-numbers */
+https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript+json+sass+scss+typescript+typoscript&plugins=line-numbers */
+/**
+ * prism.js tomorrow night eighties for JavaScript, CoffeeScript, CSS and HTML
+ * Based on https://github.com/chriskempson/tomorrow-theme
+ * @author Rose Pritchard
+ */
 
-code[class*='language-'],
-pre[class*='language-'] {
+code[class*="language-"],
+pre[class*="language-"] {
   color: #ccc;
   background: none;
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
@@ -13,25 +18,34 @@ pre[class*='language-'] {
   word-break: normal;
   word-wrap: normal;
   line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
   tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
   hyphens: none;
+
 }
 
 /* Code blocks */
-pre[class*='language-'] {
+pre[class*="language-"] {
   padding: 1em;
+  margin: .5em 0;
   overflow: auto;
 }
 
-:not(pre) > code[class*='language-'],
-pre[class*='language-'] {
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
   background: #2d2d2d;
 }
 
 /* Inline code */
-:not(pre) > code[class*='language-'] {
-  padding: 0.1em;
-  border-radius: 0.3em;
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
   white-space: normal;
 }
 
@@ -97,7 +111,6 @@ pre[class*='language-'] {
 .token.bold {
   font-weight: bold;
 }
-
 .token.italic {
   font-style: italic;
 }
@@ -110,13 +123,13 @@ pre[class*='language-'] {
   color: green;
 }
 
-pre[class*='language-'].line-numbers {
+pre[class*="language-"].line-numbers {
   position: relative;
   padding-left: 3.8em;
   counter-reset: linenumber;
 }
 
-pre[class*='language-'].line-numbers > code {
+pre[class*="language-"].line-numbers > code {
   position: relative;
   white-space: inherit;
 }
@@ -130,7 +143,12 @@ pre[class*='language-'].line-numbers > code {
   width: 3em; /* works for line-numbers below 1000 lines */
   letter-spacing: -1px;
   border-right: 1px solid #999;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
+
 }
 
 .line-numbers-rows > span {
@@ -145,3 +163,4 @@ pre[class*='language-'].line-numbers > code {
   padding-right: 0.8em;
   text-align: right;
 }
+
