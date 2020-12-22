@@ -73,7 +73,7 @@ export const SUBJECTS = [
   'Service Worker',
   'ServiceWorker Cache',
   'IndexedDB',
-  'Store-Managers',
+  'Storage-Managers',
   'Background-Sync',
   'Push Notifications',
   'Media Session API',
