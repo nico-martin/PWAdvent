@@ -31,6 +31,7 @@ export const CALENDAR: number[] = [
 export const DATE_TODAY: dayjs.Dayjs = TODAY ? dayjs(TODAY) : dayjs();
 export const DATE_TODAY_ZERO: dayjs.Dayjs = DATE_TODAY.tz('Antarctica/McMurdo');
 export const DATE_START: dayjs.Dayjs = dayjs('2020-12-01');
+export const DATE_END: dayjs.Dayjs = dayjs('2020-12-24');
 
 export const THEMEN: string[] = [
   'manifest',

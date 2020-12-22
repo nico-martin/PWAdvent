@@ -51,6 +51,10 @@
       width: calc(100% + var(--menu-width));
       transform: translateX(calc(var(--menu-width) * -1));
     }
+
+    &__content {
+      width: 100vw;
+    }
   }
 }
 
