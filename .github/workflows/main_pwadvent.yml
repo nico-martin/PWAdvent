@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -19,7 +19,7 @@ jobs:
     - name: Set up Node.js version
       uses: actions/setup-node@v1
       with:
-        node-version: '12.x'
+        node-version: '12.13.0'
 
     - name: npm install, build, and test
       run: |
@@ -34,7 +34,7 @@ jobs:
         path: .
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: build
     environment:
       name: 'production'
@@ -52,5 +52,5 @@ jobs:
       with:
         app-name: 'pwadvent'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_aae4a6393fe140dfa3deb2a44445a4c4 }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_9acd9fed9af24ead8cc1754ad0714edb }}
         package: .
