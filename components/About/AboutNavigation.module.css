@@ -1,0 +1,13 @@
+.root {
+    display: flex;
+    justify-content: center;
+}
+
+.item {
+    color: var(--c-p);
+    font-size: var(--fs-small);
+
+    & + .item {
+        margin-left: var(--space);
+    }
+}

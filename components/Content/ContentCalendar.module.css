@@ -1,0 +1,37 @@
+.excerpt {
+    font-size: var(--fs-big);
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+.error {
+}
+
+.image {
+    width: 100%;
+    display: block;
+}
+
+.date, .cannonical {
+    margin-top: var(--space);
+}
+
+.date {
+    margin-bottom: var(--space-s);
+}
+
+.meta,
+.excerpt,
+.image {
+    margin-bottom: var(--space-l);
+}
+
+.meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.author {
+    margin-right: var(--space);
+}

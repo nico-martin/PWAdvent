@@ -1,0 +1,52 @@
+.root {
+}
+
+.level {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    animation: falling linear infinite both;
+    transform: translate3D(0, -100%, 0);
+}
+
+.position-near {
+    animation-duration: var(--s-near);
+    background-image: url('/assets/static/snow/near.png');
+    background-size: contain;
+}
+
+.position-near.levelAlt {
+    animation-delay: calc(var(--s-near) / 2);
+}
+
+.position-mid {
+    animation-duration: var(--s-mid);
+    background-image: url('/assets/static/snow/mid.png');
+    background-size: contain;
+}
+
+.position-mid.levelAlt {
+    animation-delay: calc(var(--s-mid) / 2);
+}
+
+.position-far {
+    animation-duration: var(--s-far);
+    background-image: url('/assets/static/snow/far.png');
+    background-size: contain;
+}
+
+.position-far.levelAlt {
+    animation-delay: calc(var(--s-far) / 2);
+}
+
+@keyframes falling {
+    0% {
+        transform: translate3D(-7.5%, -100%, 0);
+    }
+
+    100% {
+        transform: translate3D(7.5%, 100%, 0);
+    }
+}

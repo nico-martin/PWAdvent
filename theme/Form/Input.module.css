@@ -1,0 +1,47 @@
+.root {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-weight: bold;
+    color: var(--c-p);
+    font-size: var(--fs-small);
+    margin-bottom: 0.6em;
+}
+
+.element {
+    display: block;
+    width: 100%;
+    border-radius: var(--form-input-border-radius);
+    border: 1px solid var(--c-border);
+    color: var(--c-p);
+    line-height: 1.25;
+    padding: 0.8em 1em;
+    outline: none;
+//box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+
+    &:focus {
+        @mixin a11y-focus;
+    }
+}
+
+.isError {
+    .element {
+        border-color: var(--c-feedback-error) !important;
+    }
+}
+
+.error {
+    color: var(--c-feedback-error);
+    font-size: var(--fs-xsmall);
+    margin-top: 0.5em;
+    text-align: right;
+    width: 100%;
+    position: absolute;
+    right: 0;
+    bottom: -0.5em;
+    transform: translateY(100%);
+}

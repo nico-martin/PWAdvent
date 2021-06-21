@@ -1,0 +1,27 @@
+.about {
+}
+
+.feedback {
+    margin-top: var(--space);
+}
+
+.loader {
+    width: 100%;
+    font-size: 1.6rem;
+    padding-top: var(--space);
+
+    &:after {
+        margin: 0 auto;
+    }
+}
+
+.checked {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--space);
+
+    .svg {
+        margin-right: 0.5rem;
+        color: var(--c-secondary);
+    }
+}

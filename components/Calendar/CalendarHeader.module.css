@@ -1,0 +1,47 @@
+.root {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    transition: opacity 200ms ease-in-out;
+    opacity: 1;
+}
+
+.logo {
+    width: 12rem;
+    max-width: 50%;
+}
+
+.view {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-xl);
+}
+
+.viewButton {
+    &:first-child {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+
+    &:last-child {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+    }
+}
+
+.viewButtonActive {
+}
+
+[data-menu='open'] .root {
+    opacity: 0.1;
+}
+
+[data-layout='desktop'] .logo,
+[data-layout='desktop'] .button {
+    display: none;
+}
+
+

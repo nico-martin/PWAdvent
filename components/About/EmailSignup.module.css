@@ -1,0 +1,18 @@
+.content {
+    & > * + * {
+        margin-top: 0.5em;
+    }
+}
+
+.form {
+    margin-top: var(--space);
+}
+
+.notification {
+    margin-top: var(--space-xl);
+}
+
+.disclaimer {
+    margin-top: var(--space);
+    font-size: var(--fs-xsmall);
+}

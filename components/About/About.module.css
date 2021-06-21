@@ -1,0 +1,23 @@
+.controls,
+.navigation {
+    margin-top: var(--space-xl) !important;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--space-l);
+}
+
+.logo {
+    width: 70%;
+    padding-right: var(--space-l);
+}
+
+.description > * + * {
+    margin-top: 0.5em;
+}
+
+[data-layout='desktop'] .button {
+    display: none;
+}

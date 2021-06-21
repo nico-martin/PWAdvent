@@ -1,0 +1,7 @@
+:root {
+    --s-near: 10s;
+    --s-mid: calc(var(--s-near) * 2);
+    --s-far: calc(var(--s-near) * 3);
+    --ease-out-quad: cubic-bezier(.25, .46, .450, .94);
+    --form-input-border-radius: 4px;
+}

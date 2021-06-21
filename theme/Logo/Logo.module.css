@@ -1,0 +1,10 @@
+.root {
+  #p,
+  #a {
+    fill: var(--c-primary);
+  }
+
+  #w {
+    fill: var(--c-secondary);
+  }
+}

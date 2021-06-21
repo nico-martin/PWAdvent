@@ -1,0 +1,96 @@
+@import '../styles/fonts/font-woff2.css';
+@import '../styles/keyframes/spinner.css';
+@import '../styles/reset.css';
+@import '../styles/grid.css';
+@import '../styles/vars.css';
+@import '../styles/typography.css';
+@import '../styles/colors.css';
+@import '../styles/document.css';
+
+.app {
+    width: 1200px;
+    max-width: 100%;
+    margin: 0 auto;
+    height: 100vh;
+    padding: var(--space) 0;
+    overflow: hidden;
+    will-change: opacity;
+    transition: opacity 100ms ease-in;
+
+    &__inner {
+        display: flex;
+        height: 100%;
+        width: 100%;
+    }
+
+    &__sidebar,
+    &__content {
+        padding: 0 var(--space);
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    &__sidebar {
+        flex: 0 1 var(--menu-width);
+        padding-right: var(--space-l);
+    }
+
+    &__content {
+        height: calc(100% - var(--space));
+        flex-grow: 1;
+    }
+
+    &__snow {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 5000;
+    }
+}
+
+[data-layout='mobile'] {
+    --menu-width: 80vw;
+
+    .app {
+        &__inner {
+            width: calc(100% + var(--menu-width));
+            transform: translateX(calc(var(--menu-width) * -1));
+        }
+
+        &__content {
+            width: 100vw;
+        }
+    }
+}
+
+[data-layout-transition='true'] {
+    .app {
+        &__inner,
+        &__content {
+            will-change: transform;
+            transition: transform 200ms ease-in-out;
+        }
+    }
+}
+
+[data-layout='mobile'][data-menu='open'] {
+    .app {
+        &__inner {
+            transform: translateX(0);
+        }
+
+        &__content {
+            transform: scale(0.8);
+            transform-origin: left center;
+            opacity: 0.5;
+
+            a {
+                pointer-events: none !important;
+            }
+        }
+    }
+}

@@ -1,0 +1,9 @@
+.root {
+  margin-top: var(--space);
+  display: flex;
+  justify-content: flex-end;
+
+  & > * + * {
+    margin-left: var(--space);
+  }
+}

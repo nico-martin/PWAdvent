@@ -1,0 +1,66 @@
+.root {
+    display: inline-block;
+    position: relative;
+}
+
+.image {
+    display: block;
+    position: relative;
+    opacity: 0;
+    height: auto;
+    transition: opacity 200ms;
+    will-change: opacity;
+}
+
+.imageLazyload {
+}
+
+.imageLazyloading {
+}
+
+.imageLazyloaded {
+    opacity: 1;
+}
+
+.preview {
+//filter: url(#ls-sharp-blur); position: absolute; left: 0; top: 0;
+    width: 100%;
+    transition: opacity 200ms;
+    will-change: opacity;
+}
+
+.background {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+
+    .image,
+    .preview {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        top: 0;
+        background: center center no-repeat;
+        background-size: cover;
+    }
+}
+
+.isLoaded {
+    .preview[src$='.png'] {
+        opacity: 0;
+    }
+}
+
+.lazysizes-svgfilter {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}

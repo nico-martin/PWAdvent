@@ -1,0 +1,19 @@
+.root {
+}
+
+.label {
+    margin-bottom: var(--space);
+}
+
+.fields {
+    width: 100%;
+    display: grid;
+    grid-gap: var(--space) var(--space);
+    grid-template-columns: 1fr 1fr;
+}
+
+.isStacked {
+    .fields {
+        grid-template-columns: 1fr;
+    }
+}

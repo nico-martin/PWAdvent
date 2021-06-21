@@ -1,0 +1,94 @@
+.root {
+    position: relative;
+}
+
+.header {
+    padding-bottom: var(--space-xl);
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
+    grid-gap: var(--space-s);
+
+    @media (orientation: portrait) {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-gap: var(--space-xs);
+    }
+
+    .item {
+        position: relative;
+    }
+}
+
+.item--24 {
+    grid-column: span 2;
+    @media (orientation: portrait) {
+        grid-column: span 1;
+    }
+}
+
+.item--list {
+    grid-column: span 1;
+    @media (orientation: portrait) {
+        grid-column: span 1;
+    }
+}
+
+.list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    @media (orientation: portrait) {
+        grid-template-columns: 1fr;
+    }
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
+    grid-gap: var(--space-s);
+    margin: 0 calc(var(--space-xl) * 2);
+    @media (orientation: portrait) {
+        margin: 0 0;
+    }
+
+    overflow-y: auto;
+}
+
+.list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.list::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    transition: background-color 200ms;
+    will-change: background-color;
+    border-radius: 5px;
+}
+
+.list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.list:hover ::-webkit-scrollbar-thumb {
+    background-color: var(--c-border-dark);
+}
+
+
+.buttonOverlay {
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+    text-indent: -9999px;
+}
+
+[data-layout="desktop"] .buttonOverlay {
+    display: none;
+}
