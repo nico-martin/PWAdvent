@@ -8,12 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@master
+      uses: garygrossgarten/github-action-ssh@release
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
-        script: |
+        command: |
           cd ~/../var/docker/apps/pwadvent
           git pull
           cd ~/../var/docker
