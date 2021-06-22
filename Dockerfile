@@ -5,5 +5,5 @@ WORKDIR /usr/src/pwadvent
 COPY package*.json ./
 RUN npm install
 COPY . .
-EXPOSE 8080
+EXPOSE 80
 CMD [ "node", "npm run prod" ]
